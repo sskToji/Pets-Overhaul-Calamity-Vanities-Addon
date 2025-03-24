@@ -1,0 +1,3 @@
+displayName = Pets Overhaul: Calamity Vanities Addon
+author = sskToji
+version = 0.1
