@@ -1,0 +1,6 @@
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.AssemblyInfo.cs
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\My Games\Terraria\tModLoader\ModSources\POCalValAddon\obj\Debug\net8.0\POCalValAddon.sourcelink.json
