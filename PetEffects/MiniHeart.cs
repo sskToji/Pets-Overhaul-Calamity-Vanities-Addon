@@ -10,10 +10,10 @@ using CalamityMod.Projectiles.Healing;
 
 /*
     Miniature Elemental Heart
-    Combines Elemental Pet Effects and makes these effects better
+    Combines Elemental Pets Effects and makes these effects better
 */
 
-namespace POCalValAddon.Content.PetEffects
+namespace POCalValAddon.PetEffects
 {
     public sealed class MiniHeart : PetEffect
     {
@@ -21,14 +21,14 @@ namespace POCalValAddon.Content.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override int PetAbilityCooldown => 600;
-       
+
         public float radiusFire = 160f;
         public float radiusHeal = 480f;
         public float radiusStorm = 240f;
         public float radiusWater = 240f;
         public float movementSpeed = 0.25f;
 
-        
+
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\content\\peteffects\\miniheart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:content\\peteffects\\miniheart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\content\\peteffects\\diamondscuttle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:content\\peteffects\\diamondscuttle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\content\\peteffects\\miniheart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:content\\peteffects\\miniheart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\pocalvaladdon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,30 +22,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DiamondScuttle.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Content\\PetEffects\\DiamondScuttle.cs",
               "RelativeDocumentMoniker": "Content\\PetEffects\\DiamondScuttle.cs",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Content\\PetEffects\\DiamondScuttle.cs",
               "RelativeToolTip": "Content\\PetEffects\\DiamondScuttle.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACUAAACEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-01T13:23:06.67Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MiniHeart.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Content\\PetEffects\\MiniHeart.cs",
               "RelativeDocumentMoniker": "Content\\PetEffects\\MiniHeart.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Content\\PetEffects\\MiniHeart.cs*",
-              "RelativeToolTip": "Content\\PetEffects\\MiniHeart.cs*",
-              "ViewState": "AgIAADoAAAAAAAAAAAAAAFMAAAAQAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Content\\PetEffects\\MiniHeart.cs",
+              "RelativeToolTip": "Content\\PetEffects\\MiniHeart.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwDoAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T16:17:16.319Z",
               "EditorCaption": ""

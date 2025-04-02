@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POCalValAddon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfc68a4ca1dc22269221b0e9f738a80b1958b352")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4573cc0a72610374a7b511c38067cb85fdac4491")]
 [assembly: System.Reflection.AssemblyProductAttribute("POCalValAddon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POCalValAddon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
