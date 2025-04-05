@@ -15,15 +15,15 @@ using PetsOverhaul.PetEffects;
 
 namespace POCalValAddon.PetEffects
 {
-    public sealed class DiamondScuttle : PetEffect
+    public sealed class EmeraldScuttle : PetEffect
     {
-        public override int PetItemID => ModContent.ItemType<DiamondGeode>();
+        public override int PetItemID => ModContent.ItemType<EmeraldGeode>();
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
         public int defenseStat = 10;
-        public int robeDef = 5;
-        public int robeMana = 20;
+        public int robeDef = 4;
+        public int robeMana = 10;
         public int scuttleGemMult = 500;
         public float staffDmg = 0.25f;
 
@@ -39,41 +39,45 @@ namespace POCalValAddon.PetEffects
         //Buffs to equipment and changing tooltips of the items
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (PetIsEquipped() && item.type == ItemID.DiamondStaff)
+            if (PetIsEquipped() && item.type == ItemID.EmeraldStaff)
             {
                 damage += staffDmg;
             }
         }
-        public sealed class DiaScuttleArmor : GlobalItem
+        public sealed class EmeScuttleArmor : GlobalItem
         {
             public override bool AppliesToEntity(Item entity, bool lateInstantation)
             {
-                return entity.type == ItemID.DiamondRobe;
+                return entity.type == ItemID.EmeraldRobe;
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                DiamondScuttle dia = player.GetModPlayer<DiamondScuttle>();
-                if (item.type == ItemID.DiamondRobe)
+                EmeraldScuttle emeScuttle = Main.LocalPlayer.GetModPlayer<EmeraldScuttle>();
+                if (emeScuttle.PetIsEquipped())
                 {
-                    player.statDefense += dia.robeDef;
-                    player.statManaMax2 += dia.robeMana;
+                    EmeraldScuttle eme = player.GetModPlayer<EmeraldScuttle>();
+                    if (item.type == ItemID.EmeraldRobe)
+                    {
+                        player.statDefense += eme.robeDef;
+                        player.statManaMax2 += eme.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
             {
-                DiamondScuttle dia = Main.LocalPlayer.GetModPlayer<DiamondScuttle>();
-                if (dia.PetIsEquipped())
+                EmeraldScuttle eme = Main.LocalPlayer.GetModPlayer<EmeraldScuttle>();
+                if (eme.PetIsEquipped())
                 {
                     int def = item.defense;
-                    if (item.type == ItemID.DiamondRobe)
+                    if (item.type == ItemID.EmeraldRobe)
                     {
-                        def = dia.robeDef + item.defense;
+                        def = eme.robeDef + item.defense;
                     }
                     if (tooltips.Find(x => x.Name == "Defense") != null)
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.DiamondRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.EmeraldRobe");
                 }
             }
         }
@@ -87,30 +91,30 @@ namespace POCalValAddon.PetEffects
         public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
-            DiamondScuttle diageode = player.GetModPlayer<DiamondScuttle>();
-            if (PickerPet.PickupChecks(item, diageode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Diamond)
+            EmeraldScuttle emegeode = player.GetModPlayer<EmeraldScuttle>();
+            if (PickerPet.PickupChecks(item, emegeode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Emerald)
             {
-                for (int i = 0; i < GlobalPet.Randomizer(diageode.scuttleGemMult * item.stack, 1000); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(emegeode.scuttleGemMult * item.stack, 1000); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                 }
             }
         }
         //Tooltip
-        public sealed class DiamondScuttlePetItem : PetTooltip
+        public sealed class EmeraldScuttlePetItem : PetTooltip
         {
-            public override PetEffect PetsEffect => diaScuttle;
-            public static DiamondScuttle diaScuttle
+            public override PetEffect PetsEffect => emeScuttle;
+            public static EmeraldScuttle emeScuttle
             {
                 get
                 {
-                    if (Main.LocalPlayer.TryGetModPlayer(out DiamondScuttle pet))
+                    if (Main.LocalPlayer.TryGetModPlayer(out EmeraldScuttle pet))
                         return pet;
                     else
-                        return ModContent.GetInstance<DiamondScuttle>();
+                        return ModContent.GetInstance<EmeraldScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.DiamondScuttle");
+            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.EmeraldScuttle");
         }
     }
 }

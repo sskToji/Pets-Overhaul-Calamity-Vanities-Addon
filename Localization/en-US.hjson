@@ -1,0 +1,91 @@
+Mods: {
+	POCalValAddon: {
+		PetTooltips: {
+			BrimstoneBerry:
+				'''
+				* Increases flight time
+				* Decreases damage taken from Brimstone Flames
+				* Nullifies Brimstone Flames when using Dormant Brimseeker
+				'''
+
+			Scuttlers: {
+				AmberScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Amber Staff and Amber Robe
+					* Gives Fortune on Amber
+					'''
+				AmethystScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Amethyst Staff and Amethyst Robe
+					* Gives Fortune on Amethysts
+					'''
+				CrystalScuttle:
+					'''
+					<class>
+					*
+					*
+					'''
+				DiamondScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Diamond Staff and Diamond Robe
+					* Gives Fortune on Diamonds
+					'''
+				EmeraldScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Emerald Staff and Emerald Robe
+					* Gives Fortune on Emeralds
+					'''
+				RubyScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Ruby Staff and Ruby Robe
+					* Gives Fortune on Rubies
+					'''
+				SapphireScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Sapphire Staff and Sapphire Robe
+					* Gives Fortune on Sapphires
+					'''
+				TopazScuttle:
+					'''
+					<class>
+					* Gives 10 Defense
+					* Improves Topaz Staff and Topaz Robe
+					* Gives Fortune on Topaz
+					'''
+			}
+
+			Elementals.MiniatureElementalHeart:
+				'''
+				<class>
+				- Combines all Elemental Pet effects and makes them stronger
+				 * Gain a damaging circle of fire
+				 * Gain a slowing circle of water
+				 * Gain increased movement speed
+				 * Spawn orbs that heal on pickup
+				 * If damaged, confuse enemies around you
+				'''
+		}
+
+		ItemTooltips: {
+			AmberRobe: Increases maximum mana by 70
+			AmethystRobe: Increases maximum mana by 40
+			DiamondRobe: Increases maximum mana by 80
+			EmeraldRobe: Increases maximum mana by 50
+			RubyRobe: Increases maximum mana by 70
+			SapphireRobe: Increases maximum mana by 50
+			TopazRobe: Increases maximum mana by 40
+		}
+	}
+}

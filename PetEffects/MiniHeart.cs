@@ -7,11 +7,7 @@ using Terraria.ModLoader;
 using CalValEX.Items.Pets.Elementals;
 using CalamityMod.Dusts;
 using CalamityMod.Projectiles.Healing;
-
-/*
-    Miniature Elemental Heart
-    Combines Elemental Pets Effects and makes these effects better
-*/
+using Terraria.Localization;
 
 namespace POCalValAddon.PetEffects
 {
@@ -52,7 +48,7 @@ namespace POCalValAddon.PetEffects
                     Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center - Main.rand.NextVector2Circular(radiusHeal, radiusHeal), -Vector2.UnitY * 6f, ModContent.ProjectileType<CactusHealOrb>(), 0, 0, Player.whoAmI);
                     Pet.timer = Pet.timerMax;
                 }
-                //Effects Gained from Anahita (Water Elemental)
+                //Effects Gained from Anahita/Water Elemental (Slowing circle)
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Water, (int)radiusWater, dustAmount: 16);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
@@ -79,6 +75,7 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
+        //Tooltip
         public sealed class MiniHeartPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => miniHeart;
@@ -92,7 +89,7 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<MiniHeart>();
                 }
             }
-            public override string PetsTooltip => miniHeart.movementSpeed.ToString() + "<class>";
+            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.MiniatureElementalHeart");
         }
     }
 }
