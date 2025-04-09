@@ -7,11 +7,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
 using CalValEX.Items.Pets.Scuttlers;
 using System.Security.Cryptography.X509Certificates;
-using POCalValAddon.Systems;
-using PetsOverhaul.PetEffects;
 
 namespace POCalValAddon.PetEffects
 {
@@ -21,27 +18,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 5;
         public int robeMana = 20;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int diamondMana = 80;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
-
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.DiamondStaff)
+            if (PetIsEquipped() && (item.type == ItemID.DiamondStaff || item.type == ItemID.WhitePhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class DiaScuttleArmor : GlobalItem
@@ -52,11 +48,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                DiamondScuttle dia = player.GetModPlayer<DiamondScuttle>();
-                if (item.type == ItemID.DiamondRobe)
+                DiamondScuttle diaScuttle = Main.LocalPlayer.GetModPlayer<DiamondScuttle>();
+                if (diaScuttle.PetIsEquipped())
                 {
-                    player.statDefense += dia.robeDef;
-                    player.statManaMax2 += dia.robeMana;
+                    DiamondScuttle dia = player.GetModPlayer<DiamondScuttle>();
+                    if (item.type == ItemID.DiamondRobe)
+                    {
+                        player.statDefense += dia.robeDef;
+                        player.statManaMax2 += dia.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -73,13 +73,12 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.DiamondRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", dia.diamondMana.ToString());
                 }
             }
         }
 
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -96,8 +95,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class DiamondScuttlePetItem : PetTooltip
+        
+        public sealed class DiamondScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => diaScuttle;
             public static DiamondScuttle diaScuttle

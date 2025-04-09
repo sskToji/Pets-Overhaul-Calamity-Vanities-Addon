@@ -21,27 +21,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 4;
         public int robeMana = 10;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int amberMana = 70;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
-
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.AmberStaff)
+            if (PetIsEquipped() && (item.type == ItemID.AmberStaff || item.type == ItemID.OrangePhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class AmbScuttleArmor : GlobalItem
@@ -52,11 +51,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                AmberScuttle amb = player.GetModPlayer<AmberScuttle>();
-                if (item.type == ItemID.AmberRobe)
+                AmberScuttle ambScuttle = Main.LocalPlayer.GetModPlayer<AmberScuttle>();
+                if (ambScuttle.PetIsEquipped())
                 {
-                    player.statDefense += amb.robeDef;
-                    player.statManaMax2 += amb.robeMana;
+                    AmberScuttle amb = player.GetModPlayer<AmberScuttle>();
+                    if (item.type == ItemID.AmberRobe)
+                    {
+                        player.statDefense += amb.robeDef;
+                        player.statManaMax2 += amb.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -73,13 +76,12 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.AmberRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", amb.amberMana.ToString());
                 }
             }
         }
 
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -96,8 +98,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class AmberScuttlePetItem : PetTooltip
+        
+        public sealed class AmberScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => ambScuttle;
             public static AmberScuttle ambScuttle

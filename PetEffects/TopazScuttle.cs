@@ -21,27 +21,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 3;
         public int robeMana = 20;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int topazMana = 40;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
 
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.TopazStaff)
+            if (PetIsEquipped() && (item.type == ItemID.TopazStaff || item.type == ItemID.YellowPhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class TopScuttleArmor : GlobalItem
@@ -52,11 +51,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                TopazScuttle top = player.GetModPlayer<TopazScuttle>();
-                if (item.type == ItemID.TopazRobe)
+                TopazScuttle topScuttle = Main.LocalPlayer.GetModPlayer<TopazScuttle>();
+                if (topScuttle.PetIsEquipped())
                 {
-                    player.statDefense += top.robeDef;
-                    player.statManaMax2 += top.robeMana;
+                    TopazScuttle top = player.GetModPlayer<TopazScuttle>();
+                    if (item.type == ItemID.TopazRobe)
+                    {
+                        player.statDefense += top.robeDef;
+                        player.statManaMax2 += top.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -65,7 +68,7 @@ namespace POCalValAddon.PetEffects
                 if (top.PetIsEquipped())
                 {
                     int def = item.defense;
-                    if (item.type == ItemID.RubyRobe)
+                    if (item.type == ItemID.TopazRobe)
                     {
                         def = top.robeDef + item.defense;
                     }
@@ -73,13 +76,12 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.TopazRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", top.topazMana.ToString());
                 }
             }
         }
 
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -96,8 +98,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class TopazScuttlePetItem : PetTooltip
+       
+        public sealed class TopazScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => topScuttle;
             public static TopazScuttle topScuttle

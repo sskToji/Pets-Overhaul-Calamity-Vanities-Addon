@@ -8,5 +8,5 @@ using Terraria.ModLoader;
 
 namespace POCalValAddon.Systems
 {
-    
+
 }

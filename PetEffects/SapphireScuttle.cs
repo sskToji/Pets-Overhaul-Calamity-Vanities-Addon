@@ -21,27 +21,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 3;
         public int robeMana = 10;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int sapphireMana = 50;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
 
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.SapphireStaff)
+            if (PetIsEquipped() && (item.type == ItemID.SapphireStaff || item.type == ItemID.BluePhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class SapScuttleArmor : GlobalItem
@@ -52,11 +51,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                SapphireScuttle sap = player.GetModPlayer<SapphireScuttle>();
-                if (item.type == ItemID.SapphireRobe)
+                SapphireScuttle sapScuttle = Main.LocalPlayer.GetModPlayer<SapphireScuttle>();
+                if (sapScuttle.PetIsEquipped())
                 {
-                    player.statDefense += sap.robeDef;
-                    player.statManaMax2 += sap.robeMana;
+                    SapphireScuttle sap = player.GetModPlayer<SapphireScuttle>();
+                    if (item.type == ItemID.SapphireRobe)
+                    {
+                        player.statDefense += sap.robeDef;
+                        player.statManaMax2 += sap.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -73,13 +76,12 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.SapphireRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", sap.sapphireMana.ToString());
                 }
             }
         }
-
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -96,8 +98,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class SapphireScuttlePetitem : PetTooltip
+        
+        public sealed class SapphireScuttlePetitem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => sapScuttle;
             public static SapphireScuttle sapScuttle

@@ -3,89 +3,144 @@ Mods: {
 		PetTooltips: {
 			BrimstoneBerry:
 				'''
+				<class>
 				* Increases flight time
 				* Decreases damage taken from Brimstone Flames
 				* Nullifies Brimstone Flames when using Dormant Brimseeker
+				'''
+			BabyRavager:
+				'''
+				<class>
+				* Based off of your Health and Defense, increase Melee Damage and Crit Chance
+				* Increases damage taken by 20%
+				'''
+			MoistPest:
+				'''
+				<class>
+				* Press Pet Ability Keybind (<keybind>) to shoot a circle of damaging projectiles
+				* Increases movement speed in Beach Biomes
+				'''
+			DriedPest:
+				'''
+				<class>
+				* //TODO
+				* Increases movement speed in Desert Biomes
 				'''
 
 			Scuttlers: {
 				AmberScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Amber Staff and Amber Robe
+					* Improves Yellow Phaseblade
 					* Gives Fortune on Amber
 					'''
 				AmethystScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Amethyst Staff and Amethyst Robe
+					* Improves Purple Phaseblade
 					* Gives Fortune on Amethysts
 					'''
 				CrystalScuttle:
 					'''
 					<class>
-					*
-					*
+					* Gives 10 Defense
+					* Improves Crystal Weapons and Ammo
 					'''
 				DiamondScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Diamond Staff and Diamond Robe
+					* Improves White Phaseblade
 					* Gives Fortune on Diamonds
 					'''
 				EmeraldScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Emerald Staff and Emerald Robe
+					* Improves Green Phaseblade
 					* Gives Fortune on Emeralds
 					'''
 				RubyScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Ruby Staff and Ruby Robe
+					* Improves Red Phaseblade
 					* Gives Fortune on Rubies
 					'''
 				SapphireScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Sapphire Staff and Sapphire Robe
+					* Improve Blue Phaseblade
 					* Gives Fortune on Sapphires
 					'''
 				TopazScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
+					* Gives 5 Defense
 					* Improves Topaz Staff and Topaz Robe
+					* Improves Yellow Phaseblade
 					* Gives Fortune on Topaz
+					'''
+				SpikeScuttle:
+					'''
+					<class>
+					* Combines all Scuttler Pet Effects and improves them
+					  - Gives 20 Defense
+					  - Improves all Gem Staffs and Robes
+					  - Improves all Phaseblades and Phasesabers
+					  - Improves Crystal Weapons and Ammo
+					  - Gives Fortune on all Gem Types
 					'''
 			}
 
-			Elementals.MiniatureElementalHeart:
-				'''
-				<class>
-				- Combines all Elemental Pet effects and makes them stronger
-				 * Gain a damaging circle of fire
-				 * Gain a slowing circle of water
-				 * Gain increased movement speed
-				 * Spawn orbs that heal on pickup
-				 * If damaged, confuse enemies around you
-				'''
+			Elementals: {
+				BabyBrimling:
+					'''
+					<class>
+					* Gain a damaging cicle of Flames
+					'''
+				BabyCloud:
+					'''
+					<class>
+					* Increases movement speed
+					'''
+				BabyDusty:
+					'''
+					<class>
+					* When damaged, confuse enemies around you
+					'''
+				BabyRareDusty:
+					'''
+					<class>
+					* Spawns orbs that heal on pickup
+					'''
+				BabyWaterGal:
+					'''
+					<class>
+					* Gain a slowing circle of water
+					'''
+				MiniatureElementalHeart:
+					'''
+					<class>
+					- Combines all Elemental Pet Effects and improves them
+						* Gain a damaging circle of Brimstone Flames
+						* Gain a slowing circle of water
+						* Gain increased movement speed
+						* Spawn orbs that heal on pickup
+						* When damaged, confuse enemies around you
+					'''
+			}
 		}
 
-		ItemTooltips: {
-			AmberRobe: Increases maximum mana by 70
-			AmethystRobe: Increases maximum mana by 40
-			DiamondRobe: Increases maximum mana by 80
-			EmeraldRobe: Increases maximum mana by 50
-			RubyRobe: Increases maximum mana by 70
-			SapphireRobe: Increases maximum mana by 50
-			TopazRobe: Increases maximum mana by 40
-		}
+		ItemTooltips.ManaRobe: Increases maximum mana by <mana>
 	}
 }

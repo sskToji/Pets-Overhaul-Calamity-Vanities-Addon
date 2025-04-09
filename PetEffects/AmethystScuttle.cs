@@ -21,27 +21,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 2;
         public int robeMana = 20;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int amethystMana = 40;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
 
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.AmethystStaff)
+            if (PetIsEquipped() && (item.type == ItemID.AmethystStaff || item.type == ItemID.PurplePhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class AmeScuttleArmor : GlobalItem
@@ -52,11 +51,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                AmethystScuttle ame = player.GetModPlayer<AmethystScuttle>();
-                if (item.type == ItemID.AmethystRobe)
+                AmethystScuttle ameScuttle = Main.LocalPlayer.GetModPlayer<AmethystScuttle>();
+                if (ameScuttle.PetIsEquipped())
                 {
-                    player.statDefense += ame.robeDef;
-                    player.statManaMax2 += ame.robeMana;
+                    AmethystScuttle ame = player.GetModPlayer<AmethystScuttle>();
+                    if (item.type == ItemID.AmethystRobe)
+                    {
+                        player.statDefense += ame.robeDef;
+                        player.statManaMax2 += ame.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -64,22 +67,21 @@ namespace POCalValAddon.PetEffects
                 AmethystScuttle ame = Main.LocalPlayer.GetModPlayer<AmethystScuttle>();
                 if (ame.PetIsEquipped())
                 {
+                    int indx = tooltips.FindLastIndex(x => x.Name == "Equipable") + 1;
                     int def = item.defense;
                     if (item.type == ItemID.AmethystRobe)
                     {
                         def = ame.robeDef + item.defense;
                     }
-                    if (tooltips.Find(x => x.Name == "Defense") != null)
-                        tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
+                    tooltips.Insert(indx, new(Mod, "PetToolTip0", $"{def}{Language.GetTextValue("LegacyTooltip.25")}"));
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.AmethystRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", ame.amethystMana.ToString());
                 }
             }
         }
 
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -88,7 +90,7 @@ namespace POCalValAddon.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             AmethystScuttle amegeode = player.GetModPlayer<AmethystScuttle>();
-            if (PickerPet.PickupChecks(item, amegeode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Amber)
+            if (PickerPet.PickupChecks(item, amegeode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Amethyst)
             {
                 for (int i = 0; i < GlobalPet.Randomizer(amegeode.scuttleGemMult * item.stack, 1000); i++)
                 {
@@ -96,8 +98,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class AmethystScuttlePetItem : PetTooltip
+        
+        public sealed class AmethystScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => ameScuttle;
             public static AmethystScuttle ameScuttle

@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CalValEX.Items.Pets.Elementals;
+using Terraria.Localization;
+using PetsOverhaul.Systems;
 using CalamityMod.Dusts;
 using CalamityMod.Projectiles.Healing;
-using Terraria.Localization;
+using CalamityMod.Buffs.DamageOverTime;
+using CalValEX.Items.Pets.Elementals;
 
 namespace POCalValAddon.PetEffects
 {
@@ -16,14 +17,14 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<MiniatureElementalHeart>();
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
-        public override int PetAbilityCooldown => 600;
 
+        public override int PetAbilityCooldown => miniHeartCooldown;
+        public int miniHeartCooldown = 600;
         public float radiusFire = 160f;
         public float radiusHeal = 480f;
         public float radiusStorm = 240f;
         public float radiusWater = 240f;
         public float movementSpeed = 0.25f;
-
 
         public override void PostUpdateMiscEffects()
         {
@@ -36,7 +37,7 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusFire)
                     {
-                        item.AddBuff(BuffID.OnFire, 300);
+                        item.AddBuff(ModContent.BuffType<BrimstoneFlames>(), 300);
                     }
                 }
                 //Effects gained from Cloud Elemental (Movement Speed)
@@ -49,7 +50,7 @@ namespace POCalValAddon.PetEffects
                     Pet.timer = Pet.timerMax;
                 }
                 //Effects Gained from Anahita/Water Elemental (Slowing circle)
-                GlobalPet.CircularDustEffect(Player.Center, DustID.Water, (int)radiusWater, dustAmount: 16);
+                GlobalPet.CircularDustEffect(Player.Center, DustID.Water, (int)radiusWater, dustAmount: 32);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
                     if (item.Distance(Player.Center) <= radiusWater)
@@ -75,8 +76,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class MiniHeartPetItem : PetTooltip
+
+        public sealed class MiniHeartPetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => miniHeart;
             public static MiniHeart miniHeart

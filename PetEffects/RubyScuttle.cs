@@ -21,27 +21,26 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Mining;
 
-        public int defenseStat = 10;
+        public int defenseStat = 5;
         public int robeDef = 4;
         public int robeMana = 10;
         public int scuttleGemMult = 500;
-        public float staffDmg = 0.25f;
+        public float weaponDmg = 0.25f;
+        public int rubyMana = 70;
 
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
         {
             if (PetIsEquipped())
             {
-                //Defense increase from Scuttle
                 Player.statDefense += defenseStat;
             }
         }
 
-        //Buffs to equipment and changing tooltips of the items
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
-            if (PetIsEquipped() && item.type == ItemID.RubyStaff)
+            if (PetIsEquipped() && (item.type == ItemID.RubyStaff || item.type == ItemID.RedPhaseblade))
             {
-                damage += staffDmg;
+                damage += weaponDmg;
             }
         }
         public sealed class RubScuttleArmor : GlobalItem
@@ -52,11 +51,15 @@ namespace POCalValAddon.PetEffects
             }
             public override void UpdateEquip(Item item, Player player)
             {
-                RubyScuttle rub = player.GetModPlayer<RubyScuttle>();
-                if (item.type == ItemID.RubyRobe)
+                RubyScuttle rubScuttle = Main.LocalPlayer.GetModPlayer<RubyScuttle>();
+                if (rubScuttle.PetIsEquipped())
                 {
-                    player.statDefense += rub.robeDef;
-                    player.statManaMax2 += rub.robeMana;
+                    RubyScuttle rub = player.GetModPlayer<RubyScuttle>();
+                    if (item.type == ItemID.RubyRobe)
+                    {
+                        player.statDefense += rub.robeDef;
+                        player.statManaMax2 += rub.robeMana;
+                    }
                 }
             }
             public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -73,13 +76,12 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.RubyRobe");
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("ItemTooltip.BandofStarpower").Replace("20", rub.rubyMana.ToString());
                 }
             }
         }
 
-        //Increase in Droprate of Gemtype
-        public override void Load()
+        public override void Load() //Increase in Droprate of Gemtype
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -96,8 +98,8 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        //Tooltip
-        public sealed class RubyScuttlePetItem : PetTooltip
+        
+        public sealed class RubyScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => rubScuttle;
             public static RubyScuttle rubScuttle
