@@ -23,8 +23,26 @@ Mods: {
 			DriedPest:
 				'''
 				<class>
-				* //TODO
+				* On cooldown, gain a shield when below 20% HP
 				* Increases movement speed in Desert Biomes
+				'''
+			AeroSlime:
+				'''
+				<class>
+				* Increases flight time
+				* Gives permanent slow fall
+				'''
+			SneakerDude:
+				'''
+				<class>
+				* Decreases damage taken from Brimstone Flames
+				* Increases Fortune on Bloodstone
+				'''
+			Shydolist:
+				'''
+				<class>
+				* Reduces cost and use time of magic weapons
+				* Applies Electrify when hitting enemies
 				'''
 
 			Scuttlers: {

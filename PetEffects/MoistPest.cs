@@ -25,11 +25,11 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
 
-        public int moistLocketCooldown = 300;
-        public float radiusMoist = 20f;
-        public int moistDmg = 100;
+        public int moistCooldown = 300;
+        public float moistRadius = 20f;
+        public int moistDmg = 100; //currently unused, is meant to be damage from particles
         public float oceanMovement = 0.20f;
-        public override int PetAbilityCooldown => moistLocketCooldown;
+        public override int PetAbilityCooldown => moistCooldown;
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
@@ -37,7 +37,7 @@ namespace POCalValAddon.PetEffects
             {
                 if (Pet.timer <= 0)
                 {
-                    Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center - Main.rand.NextVector2Circular(radiusMoist, radiusMoist), -Vector2.UnitY * 6f, ModContent.ProjectileType<UrchinSpikeFugu>(), 0, 0, Player.whoAmI);
+                    Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center - Main.rand.NextVector2Circular(moistRadius, moistRadius), -Vector2.UnitY * 6f, ModContent.ProjectileType<UrchinSpikeFugu>(), 0, 0, Player.whoAmI);
                     Pet.timer = Pet.timerMax;
                 }
             }
