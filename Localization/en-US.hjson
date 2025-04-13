@@ -4,119 +4,150 @@ Mods: {
 			BrimstoneBerry:
 				'''
 				<class>
-				* Increases flight time
-				* Decreases damage taken from Brimstone Flames
-				* Nullifies Brimstone Flames when using Dormant Brimseeker
+				- Increases flight time
+				- Decreases damage taken from Brimstone Flames
+				- Nullifies Brimstone Flames when using Dormant Brimseeker
 				'''
 			BabyRavager:
 				'''
 				<class>
-				* Based off of your Health and Defense, increase Melee Damage and Crit Chance
-				* Increases damage taken by 20%
+				- Based off of your Health and Defense, increase Melee Damage and Crit Chance
+				- Increases damage taken by 20%
 				'''
 			MoistPest:
 				'''
 				<class>
-				* Press Pet Ability Keybind (<keybind>) to shoot a circle of damaging projectiles
-				* Increases movement speed in Beach Biomes
+				- Press Pet Ability Keybind (<keybind>) to shoot a circle of Water Spears
+				- Increases movement speed in Beach Biomes
 				'''
 			DriedPest:
 				'''
 				<class>
-				* On cooldown, gain a shield when below 20% HP
-				* Increases movement speed in Desert Biomes
+				- On cooldown, gain a shield when below 20% HP
+				- Increases movement speed in Desert Biomes
+				'''
+			KingsCoin:
+				'''
+				<class>
+				- On cooldown, when below 20% hp
+				  * Gain a temporary shield
+				  * Shoot a barrage of Water Spears
+				- Increases movement speed in Desert and Beach Biomes
 				'''
 			AeroSlime:
 				'''
 				<class>
-				* Increases flight time
-				* Gives permanent slow fall
+				- Increases flight time
+				- Gives permanent slow fall
 				'''
 			SneakerDude:
 				'''
 				<class>
-				* Decreases damage taken from Brimstone Flames
-				* Increases Fortune on Bloodstone
+				- Decreases damage taken from Brimstone Flames
+				- Increases Fortune on Bloodstone
 				'''
 			Shydolist:
 				'''
 				<class>
-				* Reduces cost and use time of magic weapons
-				* Applies Electrify when hitting enemies
+				- Reduces cost and use time of magic weapons
+				- Applies Electrify when hitting enemies
+				'''
+			Tara:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to confuse enemies around you
+				'''
+			EggBaby:
+				'''
+				<class>
+				- Consume Gel to increase damage of certain Summoning Weapons
+				'''
+			JungleNugget:
+				'''
+				<class>
+				- With Rogue and Melee weapons, apply Dragonfire on hit
+				- Deal less Damage with Rogue and Melee weapons
+				- Deal more Damage with Yharon Dropped Rogue and Melee weapons
+				'''
+			ClamHermit:
+				'''
+				<class>
+				- Gain more Breath Time
+				- When underwater, increases Damage of all Weapons
 				'''
 
 			Scuttlers: {
 				AmberScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Amber Staff and Amber Robe
-					* Improves Yellow Phaseblade
-					* Gives Fortune on Amber
+					- Gives 5 Defense
+					- Improves Amber Staff and Amber Robe
+					- Improves Yellow Phaseblade
+					- Gives Fortune on Amber
 					'''
 				AmethystScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Amethyst Staff and Amethyst Robe
-					* Improves Purple Phaseblade
-					* Gives Fortune on Amethysts
+					- Gives 5 Defense
+					- Improves Amethyst Staff and Amethyst Robe
+					- Improves Purple Phaseblade
+					- Gives Fortune on Amethysts
 					'''
 				CrystalScuttle:
 					'''
 					<class>
-					* Gives 10 Defense
-					* Improves Crystal Weapons and Ammo
+					- Gives 10 Defense
+					- Improves Crystal Weapons and Ammo
 					'''
 				DiamondScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Diamond Staff and Diamond Robe
-					* Improves White Phaseblade
-					* Gives Fortune on Diamonds
+					- Gives 5 Defense
+					- Improves Diamond Staff and Diamond Robe
+					- Improves White Phaseblade
+					- Gives Fortune on Diamonds
 					'''
 				EmeraldScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Emerald Staff and Emerald Robe
-					* Improves Green Phaseblade
-					* Gives Fortune on Emeralds
+					- Gives 5 Defense
+					- Improves Emerald Staff and Emerald Robe
+					- Improves Green Phaseblade
+					- Gives Fortune on Emeralds
 					'''
 				RubyScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Ruby Staff and Ruby Robe
-					* Improves Red Phaseblade
-					* Gives Fortune on Rubies
+					- Gives 5 Defense
+					- Improves Ruby Staff and Ruby Robe
+					- Improves Red Phaseblade
+					- Gives Fortune on Rubies
 					'''
 				SapphireScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Sapphire Staff and Sapphire Robe
-					* Improve Blue Phaseblade
-					* Gives Fortune on Sapphires
+					- Gives 5 Defense
+					- Improves Sapphire Staff and Sapphire Robe
+					- Improve Blue Phaseblade
+					- Gives Fortune on Sapphires
 					'''
 				TopazScuttle:
 					'''
 					<class>
-					* Gives 5 Defense
-					* Improves Topaz Staff and Topaz Robe
-					* Improves Yellow Phaseblade
-					* Gives Fortune on Topaz
+					- Gives 5 Defense
+					- Improves Topaz Staff and Topaz Robe
+					- Improves Yellow Phaseblade
+					- Gives Fortune on Topaz
 					'''
 				SpikeScuttle:
 					'''
 					<class>
-					* Combines all Scuttler Pet Effects and improves them
-					  - Gives 20 Defense
-					  - Improves all Gem Staffs and Robes
-					  - Improves all Phaseblades and Phasesabers
-					  - Improves Crystal Weapons and Ammo
-					  - Gives Fortune on all Gem Types
+					- Combines all Scuttler Pet Effects and improves them
+					  * Gives 20 Defense
+					  * Improves all Gem Staffs and Robes
+					  * Improves all Phaseblades and Phasesabers
+					  * Improves Crystal Weapons and Ammo
+					  * Gives Fortune on all Gem Types
 					'''
 			}
 
@@ -124,27 +155,27 @@ Mods: {
 				BabyBrimling:
 					'''
 					<class>
-					* Gain a damaging cicle of Flames
+					- Gain a damaging cicle of Flames
 					'''
 				BabyCloud:
 					'''
 					<class>
-					* Increases movement speed
+					- Increases movement speed
 					'''
 				BabyDusty:
 					'''
 					<class>
-					* When damaged, confuse enemies around you
+					- When damaged, confuse enemies around you
 					'''
 				BabyRareDusty:
 					'''
 					<class>
-					* Spawns orbs that heal on pickup
+					- Spawns orbs that heal on pickup
 					'''
 				BabyWaterGal:
 					'''
 					<class>
-					* Gain a slowing circle of water
+					- Gain a slowing circle of water
 					'''
 				MiniatureElementalHeart:
 					'''

@@ -22,7 +22,7 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<BrimberryItem>();
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
-        public float brimDmg = 0.5f;
+        public double brimDmg = 0.5;
         public bool IsStrawberry => Player.HasItem(ModContent.ItemType<DormantBrimseeker>());
 
         //Increasing wing time 
@@ -30,7 +30,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                Player.wingTimeMax += (int)(Player.wingTimeMax * 0.5);
+                Player.wingTimeMax += (int)(Player.wingTimeMax * brimDmg);
                 if (IsStrawberry == true)
                 {
                     Player.buffImmune[ModContent.BuffType<BrimstoneFlames>()] = true;

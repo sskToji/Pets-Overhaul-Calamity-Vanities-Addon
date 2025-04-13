@@ -27,7 +27,6 @@ namespace POCalValAddon.PetEffects
         public int driedCooldown = 300;
         public int driedShieldDuration = 900;
         private int lifeguardMultTimer = 0;
-
         public override int PetAbilityCooldown => driedCooldown;
 
         public override void PostUpdateMiscEffects()

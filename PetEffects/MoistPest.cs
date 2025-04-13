@@ -28,7 +28,7 @@ namespace POCalValAddon.PetEffects
         public int moistCooldown = 300;
         public float moistRadius = 20f;
         public int moistDmg = 100; //currently unused, is meant to be damage from particles
-        public float oceanMovement = 0.20f;
+        public float beachMovement = 0.20f;
         public override int PetAbilityCooldown => moistCooldown;
 
         public override void ProcessTriggers(TriggersSet triggersSet)
@@ -37,7 +37,14 @@ namespace POCalValAddon.PetEffects
             {
                 if (Pet.timer <= 0)
                 {
-                    Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center - Main.rand.NextVector2Circular(moistRadius, moistRadius), -Vector2.UnitY * 6f, ModContent.ProjectileType<UrchinSpikeFugu>(), 0, 0, Player.whoAmI);
+                    for (int i = 0; i < 25; i++)
+                    {
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center + Main.rand.NextVector2CircularEdge(Player.width, Player.height), Main.rand.NextVector2CircularEdge(10, 10), ModContent.ProjectileType<CalamityMod.Projectiles.Boss.WaterSpear>(), Pet.PetDamage(moistDmg, DamageClass.Melee), 0, Player.whoAmI);
+                        petProjectile.DamageType = DamageClass.Melee;
+                        petProjectile.CritChance = (int)Player.GetTotalCritChance<GenericDamageClass>();
+                        petProjectile.friendly = true;
+                        petProjectile.hostile = false;
+                    }
                     Pet.timer = Pet.timerMax;
                 }
             }
@@ -46,7 +53,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && Player.ZoneBeach)
             {
-                Player.moveSpeed += oceanMovement;
+                Player.moveSpeed += beachMovement;
             }
         }
 
@@ -63,7 +70,8 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<MoistPest>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.MoistPest");
+            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.MoistPest")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }
