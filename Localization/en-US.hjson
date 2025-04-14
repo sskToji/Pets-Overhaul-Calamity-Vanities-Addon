@@ -181,11 +181,43 @@ Mods: {
 					'''
 					<class>
 					- Combines all Elemental Pet Effects and improves them
-						* Gain a damaging circle of Brimstone Flames
-						* Gain a slowing circle of water
-						* Gain increased movement speed
-						* Spawn orbs that heal on pickup
-						* When damaged, confuse enemies around you
+					  * Gain a damaging circle of Brimstone Flames
+					  * Gain a slowing circle of water
+					  * Gain increased movement speed
+					  * Spawn orbs that heal on pickup
+					  * When damaged, confuse enemies around you
+					'''
+			}
+
+			ExoMechs: {
+				ExoAres:
+					'''
+					<class>
+					- Increases Damage of "Photon Ripper" and "Ares Exoskeleton"
+					- Decreases Use Time of "The Jailor" but lowers Movement Speed
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoEyes:
+					'''
+					<class>
+					- Increases Crit Chance of "The Atom Splitter"
+					- Decreases Use Time of "Surge Driver"
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoWorm:
+					'''
+					<class>
+					- Increases Damage of "Spine of Thanatos" and "Atlas Munitions Beacon"
+					- Increases Crit Chance of "Refraction Rotor"
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoGemstone:
+					'''
+					<class>
+					- Combines Effects of all Exo Mech Pets
+					  * Increases Damage of all Melee, Rogue, Ranged and Summon Weapons
+					  * Increases Crit Chance of all Melee and Rogue Weapons
+					  * Increases Damage and Crit Chance of Exo Mech dropped Weapons even more!
 					'''
 			}
 		}
