@@ -41,10 +41,8 @@ namespace POCalValAddon.PetEffects
                 }
                 else
                 {
-                    if (Player.ConsumeItem(ItemID.Gel))
-                    {
-                        gelConsume = 30;
-                    }
+                    Player.ConsumeItem(ItemID.Gel);
+                    gelConsume = 30;
                 }
             }
         }

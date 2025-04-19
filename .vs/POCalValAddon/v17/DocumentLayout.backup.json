@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\clamhermit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\clamhermit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\slayerdoll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\slayerdoll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\junglenugget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\junglenugget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\kingscoin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\kingscoin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\babysignus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\babysignus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\mirrororb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\mirrororb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\shydolist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\shydolist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\stasisdrone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\stasisdrone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\babyravager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\babyravager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\eggbaby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\eggbaby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\smauler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\smauler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,86 +38,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "en-US.hjson",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Localization\\en-US.hjson",
               "RelativeDocumentMoniker": "Localization\\en-US.hjson",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Localization\\en-US.hjson",
               "RelativeToolTip": "Localization\\en-US.hjson",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAEwAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAuwH4AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-04-05T16:00:21.91Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClamHermit.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\ClamHermit.cs",
-              "RelativeDocumentMoniker": "PetEffects\\ClamHermit.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\ClamHermit.cs",
-              "RelativeToolTip": "PetEffects\\ClamHermit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T13:30:16.222Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "JungleNugget.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\JungleNugget.cs",
-              "RelativeDocumentMoniker": "PetEffects\\JungleNugget.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\JungleNugget.cs",
-              "RelativeToolTip": "PetEffects\\JungleNugget.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACYAAAAkAAAAAAAAAA==",
+              "Title": "KingsCoin.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\KingsCoin.cs",
+              "RelativeDocumentMoniker": "PetEffects\\KingsCoin.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\KingsCoin.cs",
+              "RelativeToolTip": "PetEffects\\KingsCoin.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowC8AAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T10:56:45.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T13:51:23.299Z",
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BabyRavager.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\BabyRavager.cs",
-              "RelativeDocumentMoniker": "PetEffects\\BabyRavager.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\BabyRavager.cs",
-              "RelativeToolTip": "PetEffects\\BabyRavager.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SlayerDoll.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\SlayerDoll.cs",
+              "RelativeDocumentMoniker": "PetEffects\\SlayerDoll.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\SlayerDoll.cs",
+              "RelativeToolTip": "PetEffects\\SlayerDoll.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAawEoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T11:51:01.985Z",
+              "WhenOpened": "2025-04-17T13:39:58.316Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Shydolist.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\Shydolist.cs",
-              "RelativeDocumentMoniker": "PetEffects\\Shydolist.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\Shydolist.cs",
-              "RelativeToolTip": "PetEffects\\Shydolist.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "MirrorOrb.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\MirrorOrb.cs",
+              "RelativeDocumentMoniker": "PetEffects\\MirrorOrb.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\MirrorOrb.cs",
+              "RelativeToolTip": "PetEffects\\MirrorOrb.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowDYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T11:42:54.85Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-16T12:31:57.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BabySignus.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\BabySignus.cs",
+              "RelativeDocumentMoniker": "PetEffects\\BabySignus.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\BabySignus.cs",
+              "RelativeToolTip": "PetEffects\\BabySignus.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAIwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T10:57:47.32Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "EggBaby.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\EggBaby.cs",
-              "RelativeDocumentMoniker": "PetEffects\\EggBaby.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\EggBaby.cs",
-              "RelativeToolTip": "PetEffects\\EggBaby.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB4AAAAKAAAAAAAAAA==",
+              "Title": "StasisDrone.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\StasisDrone.cs",
+              "RelativeDocumentMoniker": "PetEffects\\StasisDrone.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\StasisDrone.cs",
+              "RelativeToolTip": "PetEffects\\StasisDrone.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-12T12:16:34.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-16T12:15:28.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Smauler.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\Smauler.cs",
+              "RelativeDocumentMoniker": "PetEffects\\Smauler.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\Smauler.cs",
+              "RelativeToolTip": "PetEffects\\Smauler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T13:24:27.109Z"
             }
           ]
         }

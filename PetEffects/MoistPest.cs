@@ -27,7 +27,7 @@ namespace POCalValAddon.PetEffects
 
         public int moistCooldown = 300;
         public float moistRadius = 20f;
-        public int moistDmg = 100; //currently unused, is meant to be damage from particles
+        public int moistDmg = 100;
         public float beachMovement = 0.20f;
         public override int PetAbilityCooldown => moistCooldown;
 

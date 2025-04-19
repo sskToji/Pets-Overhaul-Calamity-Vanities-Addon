@@ -25,7 +25,6 @@ namespace POCalValAddon.PetEffects
         public double brimDmg = 0.5;
         public bool IsStrawberry => Player.HasItem(ModContent.ItemType<DormantBrimseeker>());
 
-        //Increasing wing time 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

@@ -75,7 +75,65 @@ Mods: {
 				- Gain more Breath Time
 				- When underwater, increases Damage of all Weapons
 				'''
-
+			George:
+				'''
+				<class>
+				- Whilst in the Abyss or Sulphurous Sea:
+				  * Gain 5 Defense
+				  * Slightly reduces enemy aggression
+				'''
+			GeorgeMecha:
+				'''
+				<class>
+				- Buffs all of Draedon's Arsenal
+				   * Pre Hardmode weapons are slightly buffed
+				   * Hardmode weapons are considerably buffed
+				   * Post Moonlord weapons are significantly buffed
+				- Whilst in the Abyss or Sulphurous Sea
+				   * Considerably reduces enemy aggression
+				'''
+			BabySignus:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to shoot out 3 Signus Scythes
+				- Increases Summon Damage
+				'''
+			StasisDrone:
+				'''
+				<class>
+				- Whilst it's raining
+				   * Gain increased Movement Speed
+				   * Gain increased Horizontal Flight Speed
+				   * Gain increased Run Acceleration
+				'''
+			MirrorOrb:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to activate a reflecting shield
+				   * This shield reflects 40% of all damage taken
+				   * This effect lasts for 5 Hits
+				'''
+			SlayerDoll:
+				'''
+				<class>
+				The Sentinels protect and buff you!
+				- Press Pet Ability Keybind (<keybind>) to activate a stronger reflecting shield
+				   * This shield reflects 45% of all damage taken
+				   * This effect lasts for 5 Hits
+				   * Also shoot out a barrage of Signus Scythes
+				- Whilst it's raining
+				   * Gain increased Movement Speed, Horizontal Flight and Run Acceleration
+				'''
+			Smauler:
+				'''
+				<class>
+				- Within a radius, apply Irradiated to enemies
+				'''
+			GrandsonShark:
+				'''
+				<class>
+				- Increases damage of weapons crafted with "Grand Scale"
+				'''
 			Scuttlers: {
 				AmberScuttle:
 					'''
