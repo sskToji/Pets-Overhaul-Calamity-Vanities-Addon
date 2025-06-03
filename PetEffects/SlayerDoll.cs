@@ -20,21 +20,22 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Utility;
 
         //Mirror Matter 
-        public int mirrorTimer = 0;
-        public int mirrorTimerMax = 5;
+        public int mirrorHit = 0;
+        public int mirrorHitMax = 5;
         public int mirrorCooldown = 5400;
-        public bool mirrorReducOn = false;
         public float mirrorReduction = 0.55f;
         //Stasis Drone
         public float droneMovespeed = 0.2f;
         public float droneAccelspeed = 0.15f;
-        public float droneWingTimeStore = 0.4f;
-        private float droneWingTimeBank = 0;
+        public float droneWingSpeed = 0.25f;
         //Baby Signus
         public int signusActiveDmg = 150;
         public int trigger = -1;
 
         public override int PetAbilityCooldown => mirrorCooldown;
+        public override int PetStackCurrent => mirrorHit;
+        public override int PetStackMax => mirrorHitMax;
+        public override string PetStackText => "shielded hits";
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
@@ -43,42 +44,26 @@ namespace POCalValAddon.PetEffects
             {
                 if (Pet.timer <= 0)
                 {
-                    mirrorReducOn = true;
+                    mirrorHit = mirrorHitMax;
                     trigger = 80;
                     Pet.timer = Pet.timerMax;
                 }
-            }
-            //Stasis Drone Horizontal Wingspeed increase
-            if (Player.wingTime > 0 && PetIsEquipped() && triggersSet.Jump && Player.dead == false && Player.equippedWings is not null && Player.ZoneRain is not false)
-            {
-                float total = Math.Abs(Player.velocity.Y) + Math.Abs(Player.velocity.X);
-                float xRemain = Math.Abs(Player.velocity.X) / total;
-                if (xRemain is float.NaN)
-                {
-                    xRemain = 0;
-                }
-                droneWingTimeBank += Math.Abs(xRemain * droneWingTimeStore);
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             //Applying Mirror Matter Thorns + Damage Reduction
-            if (PetIsEquipped() && mirrorReducOn == true)
+            if (PetIsEquipped() && mirrorHit > 0)
             {
                 modifiers.FinalDamage *= mirrorReduction; //45% Damage Reduction
                 Player.thorns += 6;
-                mirrorTimer++;
-                if (mirrorTimer >= mirrorTimerMax)
-                {
-                    mirrorReducOn = false;
-                    mirrorTimer = 0;
-                }
+                mirrorHit--;
             }
         }
         public override void PostUpdateMiscEffects()
         {
             //Spawning Signus Scythes
-            if (PetIsEquipped() && mirrorReducOn == true && trigger >= 0)
+            if (PetIsEquipped() && trigger >= 0)
             {
                 if (trigger % 20 == 0)
                 {
@@ -106,14 +91,21 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped() && Player.ZoneRain is not false)
             {
                 Player.runAcceleration *= droneAccelspeed + 1f;
-                if (droneWingTimeBank >= 1 && Player.wingTime < Player.wingTimeMax)
-                {
-                    Player.wingTime++;
-                    droneWingTimeBank--;
-                }
             }
         }
 
+        public sealed class SlayerDollWing : GlobalItem
+        {
+            public override bool InstancePerEntity => true;
+
+            public override void HorizontalWingSpeeds(Item item, Player player, ref float speed, ref float acceleration)
+            {
+                if (player.TryGetModPlayer(out SlayerDoll slayerDoll) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ModContent.ItemType<GodSlayerDoll>()) && player.ZoneRain is not false)
+                {
+                    speed += slayerDoll.droneWingSpeed;
+                }
+            }
+        }
         public sealed class SlayerDollPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => slayerDoll;

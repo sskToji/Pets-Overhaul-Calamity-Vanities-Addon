@@ -10,17 +10,18 @@ using Terraria.GameInput;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
+//change wing to speed, not time
+
 namespace POCalValAddon.PetEffects
 {
     public sealed class StasisDrone : PetEffect
     {
         public override int PetItemID => ModContent.ItemType<ArmoredScrap>();
-        public override PetClasses PetClassPrimary => PetClasses.Utility;
+        public override PetClasses PetClassPrimary => PetClasses.Mobility;
 
         public float droneMovespeed = 0.2f;
         public float droneAccelspeed = 0.2f;
-        public float droneWingTimeStore = 0.5f;
-        private float droneWingTimeBank = 0;
+        public float droneWingSpeed = 0.2f;
 
         public override void PostUpdateMiscEffects()
         {
@@ -34,24 +35,19 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped() && Player.ZoneRain is not false)
             {
                 Player.runAcceleration *= droneAccelspeed + 1f;
-                if (droneWingTimeBank >= 1 && Player.wingTime < Player.wingTimeMax)
-                {
-                    Player.wingTime++;
-                    droneWingTimeBank--;
-                }
+                
             }
         }
-        public override void ProcessTriggers(TriggersSet triggersSet)
+        public sealed class StasisDroneWing : GlobalItem
         {
-            if (Player.wingTime > 0 && PetIsEquipped() && triggersSet.Jump && Player.dead == false && Player.equippedWings is not null && Player.ZoneRain is not false)
+            public override bool InstancePerEntity => true;
+
+            public override void HorizontalWingSpeeds(Item item, Player player, ref float speed, ref float acceleration)
             {
-                float total = Math.Abs(Player.velocity.Y) + Math.Abs(Player.velocity.X);
-                float xRemain = Math.Abs(Player.velocity.X) / total;
-                if (xRemain is float.NaN)
+                if (player.TryGetModPlayer(out StasisDrone stasisDrone) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ModContent.ItemType<ArmoredScrap>()) && player.ZoneRain is not false)
                 {
-                    xRemain = 0;
+                    speed += stasisDrone.droneWingSpeed;
                 }
-                droneWingTimeBank += Math.Abs(xRemain * droneWingTimeStore);
             }
         }
 

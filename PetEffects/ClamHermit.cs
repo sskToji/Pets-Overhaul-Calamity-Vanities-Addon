@@ -18,14 +18,14 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
 
-        public int clamBreathMax = 50; //200 is base, so 50 is a 25% increase
+        public int clamBreath = 50; //200 is base, so 50 is a 25% increase
         public float clamDmg = 0.1f;
 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
-                Player.breathMax += clamBreathMax;
+                Player.breathMax += clamBreath;
             }
         }
 

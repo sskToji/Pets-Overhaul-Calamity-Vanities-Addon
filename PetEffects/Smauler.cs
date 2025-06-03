@@ -24,7 +24,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                GlobalPet.CircularDustEffect(Player.Center, ModContent.DustType<AuricBarDust>(), (int)radiusSmauler, dustAmount: 128);
+                GlobalPet.CircularDustEffect(Player.Center, ModContent.DustType<AuricBarDust>(), (int)radiusSmauler, dustAmount: 64);
                 foreach(NPC item in Main.ActiveNPCs)
                 {
                     if (item.Distance(Player.Center) <= radiusSmauler)

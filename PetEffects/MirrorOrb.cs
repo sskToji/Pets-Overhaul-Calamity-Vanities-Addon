@@ -19,13 +19,15 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<MirrorMatter>();
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
 
-        public int mirrorTimer = 0;
-        public int mirrorTimerMax = 300;
+        public int mirrorHit = 0;
+        public int mirrorHitMax = 300;
         public int mirrorCooldown = 7200;
-        public bool mirrorReducOn = false;
         public float mirrorReduction = 0.6f;
 
         public override int PetAbilityCooldown => mirrorCooldown;
+        public override int PetStackCurrent => mirrorHit;
+        public override int PetStackMax => mirrorHitMax;
+        public override string PetStackText => "shielded hits";
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
@@ -33,23 +35,18 @@ namespace POCalValAddon.PetEffects
             {
                 if (Pet.timer <= 0)
                 {
-                    mirrorReducOn = true;
+                    mirrorHit = mirrorHitMax;
                     Pet.timer = Pet.timerMax;
                 }
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (PetIsEquipped() && mirrorReducOn == true)
+            if (PetIsEquipped() && mirrorHit > 0)
             {
                 modifiers.FinalDamage *= mirrorReduction; //45% Damage Reduction
                 Player.thorns += 6;
-                mirrorTimer++;
-                if (mirrorTimer >= mirrorTimerMax)
-                {
-                    mirrorReducOn = false;
-                    mirrorTimer = 0;
-                }
+                mirrorHit++;
             }
         }
 

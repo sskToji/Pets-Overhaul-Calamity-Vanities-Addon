@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CalamityMod.Items.Weapons.Summon;
+using CalValEX;
 using CalValEX.Items.Pets;
+using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace POCalValAddon.PetEffects
 {
@@ -20,49 +21,24 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<AstraEGGeldon>();
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
 
-        public int gelConsume = 0;
         public float summonDmg = 1.2f;
-        public static List<int> SlimeWeapons =
-        [
-            ModContent.ItemType<AbandonedSlimeStaff>(),
-            ModContent.ItemType<Perdition>(),
-            ModContent.ItemType<Vigilance>(),
-            ModContent.ItemType<EntropysVigil>()
-        ];
+        
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (PetIsEquipped() && proj.GetGlobalProjectile<SlimeProjectile>().eggProj == true)
+            if (PetIsEquipped() && Player.HasItem(ModContent.ItemType<AbandonedSlimeStaff>()))
             {
-                if (gelConsume > 0)
-                {
-                    modifiers.FinalDamage *= summonDmg;
-                    gelConsume--;
-                }
-                else
-                {
-                    Player.ConsumeItem(ItemID.Gel);
-                    gelConsume = 30;
-                }
-            }
-        }
-        public sealed class SlimeProjectile : GlobalProjectile
-        {
-            public override bool InstancePerEntity => true;
-            public bool eggProj = false;
-            public override void OnSpawn(Projectile projectile, IEntitySource source)
-            {
-                if (source is EntitySource_ItemUse item && item.Item is not null && EggBaby.SlimeWeapons.Contains(item.Item.type))
-                {
-                    eggProj = true;
-                }
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<SlimeProjectile>().eggProj == true)
-                {
-                    eggProj = true;
-                }
+                damage *= summonDmg;
             }
         }
 
+        public override void ExtraPreUpdate()
+        {
+            if (PetIsEquipped() && Player.HasItem(ModContent.ItemType<AbandonedSlimeStaff>()))
+            {
+                Player.GetModPlayer<CalValEXPlayer>().CalamityBABYBool = false;
+            }
+        }
         public sealed class EggBabyPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => eggBaby;

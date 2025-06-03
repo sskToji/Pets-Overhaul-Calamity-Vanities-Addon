@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CalamityMod.Buffs.DamageOverTime;
+using CalamityMod.Buffs.StatDebuffs;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
 using Terraria;
@@ -12,39 +13,49 @@ using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
-    public sealed class BuffMan : PetEffect
+    public sealed class SharkHeart : PetEffect
     {
-        public override int PetItemID => ModContent.ItemType<ReaperoidPills>();
+        public override int PetItemID => ModContent.ItemType<HeartoftheSharks>();
         public override PetClasses PetClassPrimary => PetClasses.Melee;
-        public override PetClasses PetClassSecondary => PetClasses.Utility;
 
         internal int currentStacks = 0;
         private int timer = 0;
         public int dmgBuffDuration = 600;
-        public int dmgStacksMax = 10;
+        public int dmgStacksMax;
         public int dmgStacksMaxSandstorm = 15;
+        public int dmgStacksMaxNormal = 10;
         public float dmgIncrease = 0.02f;
 
-        //public override int PetStackCurrent => currentStacks;
-        //public override int PetStackMax => dmgStacksMax;
+        public override int PetStackCurrent => currentStacks;
+        public override int PetStackMax => dmgStacksMax;
+        public override string PetStackText => "damage stacks";
 
         public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped())
+            timer--;
+            if (timer <= 0)
             {
-                timer--;
-                if (timer <= 0)
-                {
-                    currentStacks = 0;
-                    timer = 0;
-                }
+                currentStacks = 0;
+                timer = 0;
+            }
+            if (Player.ZoneSandstorm is true)
+            {
+                dmgStacksMax = dmgStacksMaxSandstorm;
+            }
+            else
+            {
+                dmgStacksMax = dmgStacksMaxNormal;
+            }
+            if (currentStacks > dmgStacksMax)
+            {
+                currentStacks = dmgStacksMax;
             }
         }
-
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (PetIsEquipped() && item.CountsAsClass<MeleeDamageClass>())
             {
+                target.AddBuff(ModContent.BuffType<Irradiated>(), 300);
                 target.AddBuff(ModContent.BuffType<CrushDepth>(), 300);
                 if (currentStacks < dmgStacksMax)
                 {
@@ -73,21 +84,21 @@ namespace POCalValAddon.PetEffects
                 timer = 0;
             }
         }
-
-        public sealed class BuffManPetItem : PetTooltip
+        
+        public sealed class SharkHeartPetItem : PetTooltip
         {
-            public override PetEffect PetsEffect => buffMan;
-            public static BuffMan buffMan
+            public override PetEffect PetsEffect => sharkHeart;
+            public static SharkHeart sharkHeart
             {
                 get
                 {
-                    if (Main.LocalPlayer.TryGetModPlayer(out BuffMan pet))
+                    if (Main.LocalPlayer.TryGetModPlayer(out SharkHeart pet))
                         return pet;
                     else
-                        return ModContent.GetInstance<BuffMan>();
+                        return ModContent.GetInstance<SharkHeart>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.BuffMan");
+            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.SharkHeart");
         }
     }
 }

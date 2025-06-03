@@ -1,12 +1,11 @@
 Mods: {
 	POCalValAddon: {
 		PetTooltips: {
-			BrimstoneBerry:
+			AeroSlime:
 				'''
 				<class>
 				- Increases flight time
-				- Decreases damage taken from Brimstone Flames
-				- Nullifies Brimstone Flames when using Dormant Brimseeker
+				- Gives permanent slow fall
 				'''
 			BabyRavager:
 				'''
@@ -14,11 +13,34 @@ Mods: {
 				- Based off of your Health and Defense, increase Melee Damage and Crit Chance
 				- Increases damage taken by 20%
 				'''
-			MoistPest:
+			BabySignus:
 				'''
 				<class>
-				- Press Pet Ability Keybind (<keybind>) to shoot a circle of Water Spears
-				- Increases movement speed in Beach Biomes
+				- Press Pet Ability Keybind (<keybind>) to shoot out 3 Signus Scythes
+				- Increases Summon Damage
+				'''
+			BrimstoneBerry:
+				'''
+				<class>
+				- Increases flight time
+				- Decreases damage taken from Brimstone Flames
+				- Nullifies Brimstone Flames when using Dormant Brimseeker
+				'''
+			BuffMan:
+				'''
+				<class>
+				- When hitting enemies with Melee Weapons, gain damage increasing stacks
+				   * Maximum of 5 stacks
+				- When hit, removes all stacks
+				- This effect wears off after 10 seconds of not hitting an enemy
+				- When hitting enemies with Melee Weapons, apply Crush Depth for 5 seconds
+				Only effective for Melee Weapons!
+				'''
+			ClamHermit:
+				'''
+				<class>
+				- Gain more Breath Time
+				- When underwater, increases Damage of all Weapons
 				'''
 			DriedPest:
 				'''
@@ -26,54 +48,11 @@ Mods: {
 				- On cooldown, gain a shield when below 20% HP
 				- Increases movement speed in Desert Biomes
 				'''
-			KingsCoin:
-				'''
-				<class>
-				- On cooldown, when below 20% hp
-				  * Gain a temporary shield
-				  * Shoot a barrage of Water Spears
-				- Increases movement speed in Desert and Beach Biomes
-				'''
-			AeroSlime:
-				'''
-				<class>
-				- Increases flight time
-				- Gives permanent slow fall
-				'''
-			SneakerDude:
-				'''
-				<class>
-				- Decreases damage taken from Brimstone Flames
-				- Increases Fortune on Bloodstone
-				'''
-			Shydolist:
-				'''
-				<class>
-				- Reduces cost and use time of magic weapons
-				- Applies Electrify when hitting enemies
-				'''
-			Tara:
-				'''
-				<class>
-				- Press Pet Ability Keybind (<keybind>) to confuse enemies around you
-				'''
 			EggBaby:
 				'''
 				<class>
-				- Consume Gel to increase damage of certain Summoning Weapons
-				'''
-			JungleNugget:
-				'''
-				<class>
-				- With Rogue and Melee weapons, apply Dragonfire on hit
-				- Deal less Damage with Rogue and Melee weapons
-				- Deal more Damage with Yharon Dropped Rogue and Melee weapons
-				'''
-			ClamHermit:
-				'''
-				<class>
-				- Gain more Breath Time
-				- When underwater, increases Damage of all Weapons
+				Use this pet at your own risk!
+				- Increases damage of the Abandoned Slime Staff
 				'''
 			George:
 				'''
@@ -92,19 +71,30 @@ Mods: {
 				- Whilst in the Abyss or Sulphurous Sea
 				   * Considerably reduces enemy aggression
 				'''
-			BabySignus:
+			GrandsonShark:
 				'''
 				<class>
-				- Press Pet Ability Keybind (<keybind>) to shoot out 3 Signus Scythes
-				- Increases Summon Damage
+				- Increases damage of weapons crafted with "Grand Scale"
 				'''
-			StasisDrone:
+			JellyCrystal:
 				'''
 				<class>
-				- Whilst it's raining
-				   * Gain increased Movement Speed
-				   * Gain increased Horizontal Flight Speed
-				   * Gain increased Run Acceleration
+				- Consume gel to increase summon and minion damage
+				'''
+			JungleNugget:
+				'''
+				<class>
+				- With Rogue and Melee weapons, apply Dragonfire on hit
+				- Deal less Damage with Rogue and Melee weapons
+				- Deal more Damage with Yharon Dropped Rogue and Melee weapons
+				'''
+			KingsCoin:
+				'''
+				<class>
+				- On cooldown, when below 20% hp
+				  * Gain a temporary shield
+				  * Shoot a barrage of Water Spears
+				- Increases movement speed in Desert and Beach Biomes
 				'''
 			MirrorOrb:
 				'''
@@ -112,6 +102,42 @@ Mods: {
 				- Press Pet Ability Keybind (<keybind>) to activate a reflecting shield
 				   * This shield reflects 40% of all damage taken
 				   * This effect lasts for 5 Hits
+				'''
+			MoistPest:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to shoot a circle of Water Spears
+				- Increases movement speed in Beach Biomes
+				'''
+			RepairBot:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to consume your enemies lifeforce!
+				   * This builds stacks
+				   * Increases defense and health based on how many stacks you have
+				   * Lose 100 stacks upon death
+				'''
+			SharkHeart:
+				'''
+				<class>
+				Combines the effects of the Shark Pets and improves them
+				- When hitting enemies with Melee Weapons, gain Damage increasing stacks
+				   * Maximum of 10 stacks
+				- In the Desert, during a Sandstorm:
+				   * Maximum of 15 stacks
+				- When hitting, apply Irradiated and Crush Depth for 5 seconds
+				'''
+			Shydolist:
+				'''
+				<class>
+				- Reduces cost and use time of magic weapons
+				- Applies Electrify when hitting enemies
+				'''
+			SkaterNymph:
+				'''
+				<class>
+				- Halves the effects of Irradiated
+				- In the Sulphurous Sea, gives increased Breath Timer
 				'''
 			SlayerDoll:
 				'''
@@ -122,17 +148,50 @@ Mods: {
 				   * This effect lasts for 5 Hits
 				   * Also shoot out a barrage of Signus Scythes
 				- Whilst it's raining
-				   * Gain increased Movement Speed, Horizontal Flight and Run Acceleration
+				   * Gain increased Movement Speed, Horizontal Flight Speed and Run Acceleration
 				'''
 			Smauler:
 				'''
 				<class>
 				- Within a radius, apply Irradiated to enemies
 				'''
-			GrandsonShark:
+			SmolCrab:
 				'''
 				<class>
-				- Increases damage of weapons crafted with "Grand Scale"
+				- Gives increased life regen
+				- When hit, gives you the "Mushy" buff for 5 seconds
+				'''
+			SneakerDude:
+				'''
+				<class>
+				- Decreases damage taken from Brimstone Flames
+				- Increases Fortune on Bloodstone
+				'''
+			StasisDrone:
+				'''
+				<class>
+				- Whilst it's raining
+				   * Gain increased Movement Speed
+				   * Gain increased Horizontal Flight Speed
+				   * Gain increased Run Acceleration
+				'''
+			Tara:
+				'''
+				<class>
+				- Press Pet Ability Keybind (<keybind>) to confuse enemies around you
+				'''
+			WormTumor:
+				'''
+				<class>
+				- When using Melee or Rogue weapons
+				   * Apply Ichor and Burning Blood
+				- This effect lasts longer for True Melee Attacks
+				'''
+			WyrmCan:
+				'''
+				<class>
+				- Allows you to fish anywhere, no matter the size of the pond
+				- Increases fishing power by a percentage of your bait power
 				'''
 			Scuttlers: {
 				AmberScuttle:
