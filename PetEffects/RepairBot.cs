@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 //Heartsteel based pet item.
-//TODO : Pet Tooltips, changing stack text thing, change damage amounts
+//TODO : Ask bugra about being able to show current hp and def increase on pet tooltip, not sure if this is possible
 
 namespace POCalValAddon.PetEffects
 {
@@ -26,12 +22,17 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
 
         public int heartsteelHealthIncrease = 20;
-        public int heartsteelDefincrease = 3;
+        public int heartsteelDefIncrease = 3;
         public int heartsteelCooldown = 1200;
+        public int heartsteelStackLose = 100;
+        public int heartsteelNoHitCooldown = 600;
         public int heartsteelDamageDone;
 
         public int heartsteelStacks = 0;
-        public int heartsteelStacksMax { get {
+        public int heartsteelStacksMax
+        {
+            get
+            {
                 if (NPC.downedMoonlord == true)
                 {
                     return 1000000;
@@ -49,7 +50,8 @@ namespace POCalValAddon.PetEffects
                     return 250;
                 }
                 return 100;
-            } }
+            }
+        }
         public float heartsteelRadius = 160f;
 
         public override int PetAbilityCooldown => heartsteelCooldown;
@@ -88,7 +90,7 @@ namespace POCalValAddon.PetEffects
                 }
             }
         }
-        
+
         public void DoHeartSteelDamage(NPC npc)
         {
             float damageDealt = npc.lifeMax * 0.05f;
@@ -103,7 +105,7 @@ namespace POCalValAddon.PetEffects
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, (int)heartsteelRadius, dustAmount: 64);
                 if (heartsteelStacks > 0)
                 {
-                    Player.statDefense += (int)(Math.Log10(cappedStack) * heartsteelDefincrease);
+                    Player.statDefense += (int)(Math.Log10(cappedStack) * heartsteelDefIncrease);
                     Player.statLifeMax2 += (int)(Math.Log10(cappedStack) * heartsteelHealthIncrease);
                 }
             }
@@ -113,7 +115,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                heartsteelStacks -= 100;
+                heartsteelStacks -= heartsteelStackLose;
             }
         }
 
@@ -150,8 +152,15 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<RepairBot>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.RepairBot")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.RepairBot")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<stacks>", repairBot.heartsteelStacks.ToString())
+                .Replace("<hp>", repairBot.heartsteelHealthIncrease.ToString())
+                .Replace("<def>", repairBot.heartsteelDefIncrease.ToString())
+                .Replace("<lose>", repairBot.heartsteelStackLose.ToString())
+                .Replace("<cd>", PetUtil.IntToTime(repairBot.heartsteelCooldown))
+                .Replace("<halfCd>", PetUtil.IntToTime(repairBot.heartsteelNoHitCooldown));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.RepairBot").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

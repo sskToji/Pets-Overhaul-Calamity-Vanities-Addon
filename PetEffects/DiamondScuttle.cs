@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul;
+﻿using System.Collections.Generic;
+using CalValEX.Items.Pets.Scuttlers;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX.Items.Pets.Scuttlers;
-using System.Security.Cryptography.X509Certificates;
 
 namespace POCalValAddon.PetEffects
 {
@@ -21,7 +19,7 @@ namespace POCalValAddon.PetEffects
         public int defenseStat = 5;
         public int robeDef = 5;
         public int robeMana = 20;
-        public int scuttleGemMult = 500;
+        public int scuttleGemMult = 50;
         public float weaponDmg = 0.25f;
         public int diamondMana = 80;
 
@@ -32,7 +30,7 @@ namespace POCalValAddon.PetEffects
                 Player.statDefense += defenseStat;
             }
         }
-        
+
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
             if (PetIsEquipped() && (item.type == ItemID.DiamondStaff || item.type == ItemID.WhitePhaseblade))
@@ -89,13 +87,13 @@ namespace POCalValAddon.PetEffects
             DiamondScuttle diageode = player.GetModPlayer<DiamondScuttle>();
             if (PickerPet.PickupChecks(item, diageode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Diamond)
             {
-                for (int i = 0; i < GlobalPet.Randomizer(diageode.scuttleGemMult * item.stack, 1000); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(diageode.scuttleGemMult * item.stack, 100); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                 }
             }
         }
-        
+
         public sealed class DiamondScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => diaScuttle;
@@ -109,7 +107,17 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<DiamondScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.DiamondScuttle");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Diamond")
+                .Replace("<color>", "White")
+                .Replace("<def>", diaScuttle.defenseStat.ToString())
+                .Replace("<dmg>", PetUtil.FloatToPercent(diaScuttle.weaponDmg))
+                .Replace("<robeDef>", diaScuttle.robeDef.ToString())
+                .Replace("<mana>", diaScuttle.robeMana.ToString())
+                .Replace("<chance>", diaScuttle.scuttleGemMult.ToString() + "%");
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Diamond")
+                .Replace("<color>", "White");
         }
     }
 }

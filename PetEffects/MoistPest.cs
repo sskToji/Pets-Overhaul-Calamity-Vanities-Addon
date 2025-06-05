@@ -1,21 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Steamworks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul;
-using PetsOverhaul.Items;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using CalValEX.Items.Pets;
-using System.Security.Cryptography.X509Certificates;
+using POCalValAddon.Systems;
+using Terraria;
 using Terraria.GameInput;
-using CalamityMod;
-using CalamityMod.Projectiles.Ranged;
-using CalamityMod.Projectiles.Healing;
-using CalamityMod.Projectiles.Melee;
-using CalamityMod.BiomeManagers;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -70,8 +58,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<MoistPest>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.MoistPest")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.MoistPest")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<dmg>", babyMoist.moistDmg.ToString())
+                .Replace("<cd>", PetUtil.IntToTime(babyMoist.moistCooldown))
+                .Replace("<speed>", PetUtil.FloatToPercent(babyMoist.beachMovement));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.MoistPest").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

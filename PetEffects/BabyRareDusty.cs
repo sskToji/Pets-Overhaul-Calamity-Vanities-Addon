@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Steamworks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul.Systems;
+﻿using CalamityMod.Projectiles.Healing;
 using CalValEX.Items.Pets.Elementals;
-using CalamityMod.Projectiles.Healing;
+using Microsoft.Xna.Framework;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -44,7 +41,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyRareDusty>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.BabyRareDusty");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.BabyRareDusty")
+                .Replace("<pc>", babyRare.radiusHeal.ToString())
+                .Replace("<cd>", PetUtil.IntToTime(babyRare.rareDustyCooldown));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.BabyRareDusty");
         }
     }
 }

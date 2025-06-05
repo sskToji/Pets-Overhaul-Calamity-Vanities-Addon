@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using CalValEX.Items.Pets.ExoMechs;
-using Terraria;
+﻿using CalamityMod.Items.Weapons.Melee;
 using CalamityMod.Items.Weapons.Ranged;
-using CalamityMod.Items.Weapons.Melee;
 using CalamityMod.Items.Weapons.Summon;
-using Terraria.Localization;
+using CalValEX.Items.Pets.ExoMechs;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
 using Terraria.DataStructures;
-using CalamityMod.Projectiles.Ranged;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -19,17 +16,9 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
 
         public float aresMeleeDmg = 0.2f;
-        public float aresRangedHurtReduction = 0.9f;
+        public float aresRangedHurtReduction = 0.1f;
         public float aresSummonDmg = 0.25f;
         public int aresNoUse = 0;
-        public bool aresWeaponInUse = true;
-        public static List<int> AresWeapons =
-        [
-            ModContent.ItemType<AresExoskeleton>(),
-            ModContent.ItemType<PhotonRipper>(),
-            ModContent.ItemType<TheJailor>(),
-            ModContent.ProjectileType<PrismMine>(),
-        ];
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
@@ -41,7 +30,7 @@ namespace POCalValAddon.PetEffects
             {
                 damage += aresSummonDmg;
             }
-            if (PetIsEquipped() && !AresWeapons.Contains(item.type)) //For nullifying damage from other weapons
+            if (PetIsEquipped() && !CalValItemSets.AresWeapons[item.type]) //For nullifying damage from other weapons
             {
                 damage *= aresNoUse;
             }
@@ -50,13 +39,13 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && Player.HasItem(ModContent.ItemType<TheJailor>()))
             {
-                modifiers.FinalDamage *= aresRangedHurtReduction;
+                modifiers.FinalDamage *= 1f - aresRangedHurtReduction;
             }
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !AresWeapons.Contains(item.type))
+            if (PetIsEquipped() && !CalValItemSets.AresWeapons[item.type])
             {
                 target.takenDamageMultiplier = aresNoUse;
                 if (target.lifeRegen < 0)
@@ -67,7 +56,7 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !(AresWeapons.Contains(proj.type) || proj.GetGlobalProjectile<AresProjectile>().aresProj == true))
+            if (PetIsEquipped() && !(CalValItemSets.AresWeapons[proj.type] || proj.GetGlobalProjectile<AresProjectile>().aresProj == true))
             {
                 target.takenDamageMultiplier = aresNoUse;
                 if (target.lifeRegen < 0)
@@ -82,7 +71,7 @@ namespace POCalValAddon.PetEffects
             public bool aresProj = false;
             public override void OnSpawn(Projectile projectile, IEntitySource source)
             {
-                if (source is EntitySource_ItemUse item && item.Item is not null && ExoAres.AresWeapons.Contains(item.Item.type))
+                if (source is EntitySource_ItemUse item && item.Item is not null && CalValItemSets.AresWeapons[item.Item.type])
                 {
                     aresProj = true;
                 }
@@ -105,7 +94,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<ExoAres>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.ExoMechs.ExoAres");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.ExoMechs.ExoAres")
+                .Replace("<prDmg>", PetUtil.FloatToPercent(aresBaby.aresMeleeDmg))
+                .Replace("<aeDmg>", PetUtil.FloatToPercent(aresBaby.aresSummonDmg))
+                .Replace("<reduce>", PetUtil.FloatToPercent(aresBaby.aresRangedHurtReduction));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.ExoMechs.ExoAres");
         }
     }
 }

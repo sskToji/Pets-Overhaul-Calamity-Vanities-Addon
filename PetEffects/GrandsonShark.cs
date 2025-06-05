@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Items.Weapons.Magic;
-using CalamityMod.Items.Weapons.Melee;
-using CalamityMod.Items.Weapons.Ranged;
-using CalamityMod.Items.Weapons.Rogue;
-using CalamityMod.Items.Weapons.Summon;
-using CalValEX.Items.Pets;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -23,19 +12,10 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
 
         public float sharkDmg = 0.1f;
-        public static List<int> GrandScaleWeapons =
-        [
-            ModContent.ItemType<DuststormInABottle>(),
-            ModContent.ItemType<SandSharknadoStaff>(),
-            ModContent.ItemType<Sandslasher>(),
-            ModContent.ItemType<SandstormGun>(),
-            ModContent.ItemType<ShiftingSands>(),
-            ModContent.ItemType<Tumbleweed>(),
-        ];
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (PetIsEquipped() && GrandScaleWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GrandScaleWeapons[item.type])
             {
                 damage += sharkDmg;
             }
@@ -54,7 +34,9 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<GrandsonShark>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.GrandsonShark");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.GrandsonShark")
+                .Replace("<dmg>", PetUtil.FloatToPercent(grandsonShark.sharkDmg));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.GrandsonShark");
         }
     }
 }

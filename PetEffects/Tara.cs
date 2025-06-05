@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using CalValEX.Items.Pets;
-using Terraria.ID;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 //Idea by @iamnamedmuffin
 
@@ -22,6 +17,7 @@ namespace POCalValAddon.PetEffects
 
         public float radiusConfuse = 200f;
         public int taraCooldown = 600;
+        public int debuffTime = 300;
 
         public override int PetAbilityCooldown => taraCooldown;
 
@@ -33,7 +29,7 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusConfuse)
                     {
-                        item.AddBuff(BuffID.Confused, 300);
+                        item.AddBuff(BuffID.Confused, debuffTime);
                         Pet.timer = Pet.timerMax;
                     }
                 }
@@ -60,8 +56,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<Tara>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Tara")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Tara")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<px>", redPanda.radiusConfuse.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(redPanda.debuffTime))
+                .Replace("<cd>", PetUtil.IntToTime(redPanda.taraCooldown));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Tara").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

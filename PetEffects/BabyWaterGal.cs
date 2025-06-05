@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Steamworks;
-using Terraria.ModLoader;
+﻿using CalValEX.Items.Pets.Elementals;
 using PetsOverhaul.Systems;
-using CalValEX.Items.Pets.Elementals;
-using Terraria.ID;
+using POCalValAddon.Systems;
 using Terraria;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Terraria.Localization;
-using Terraria.WorldBuilding;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -21,6 +13,7 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
         public float radiusWater = 240f;
+        public int debuffTime = 300;
 
         public override void PostUpdateMiscEffects()
         {
@@ -31,7 +24,7 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusWater)
                     {
-                        item.AddBuff(BuffID.Slow, 300);
+                        item.AddBuff(BuffID.Slow, debuffTime);
                     }
                 }
             }
@@ -50,7 +43,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyWaterGal>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.BabyWaterGal");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.BabyWaterGal")
+                .Replace("<px>", babyWater.radiusWater.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(babyWater.debuffTime));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.BabyWaterGal");
         }
     }
 }

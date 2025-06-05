@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Items;
-using PetsOverhaul.Systems;
-using PetsOverhaul.PetEffects;
-using Terraria;
-using Terraria.ID;
-using Terraria.Localization;
-using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets;
-using CalamityMod.Items.Accessories;
-using Terraria.GameInput;
-using CalamityMod.Buffs.DamageOverTime;
-using MonoMod.Core.Platforms;
+﻿using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Items.Weapons.Summon;
+using CalValEX.Items.Pets;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -22,14 +13,15 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<BrimberryItem>();
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
-        public double brimDmg = 0.5;
+        public float brimFlight = 0.5f;
+        public float brimHealth = 8f;
         public bool IsStrawberry => Player.HasItem(ModContent.ItemType<DormantBrimseeker>());
 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
-                Player.wingTimeMax += (int)(Player.wingTimeMax * brimDmg);
+                Player.wingTimeMax += (int)(Player.wingTimeMax * brimFlight);
                 if (IsStrawberry == true)
                 {
                     Player.buffImmune[ModContent.BuffType<BrimstoneFlames>()] = true;
@@ -42,7 +34,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && Player.HasBuff(ModContent.BuffType<BrimstoneFlames>()) && !IsStrawberry)
             {
-                Player.lifeRegen += 8;
+                Player.lifeRegen += (int)brimHealth;
             }
         }
         public sealed class BrimstoneBerryPetItem : PetTooltip
@@ -58,7 +50,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BrimstoneBerry>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.BrimstoneBerry");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.BrimstoneBerry")
+                .Replace("<wing>", PetUtil.FloatToPercent(brimBerry.brimFlight))
+                .Replace("<dmg>", brimBerry.brimHealth.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.BrimstoneBerry");
         }
     }
 }

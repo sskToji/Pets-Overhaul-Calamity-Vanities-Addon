@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Buffs.DamageOverTime;
+﻿using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Buffs.StatDebuffs;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -25,6 +20,7 @@ namespace POCalValAddon.PetEffects
         public int dmgStacksMaxSandstorm = 15;
         public int dmgStacksMaxNormal = 10;
         public float dmgIncrease = 0.02f;
+        public int debuffDuration = 300;
 
         public override int PetStackCurrent => currentStacks;
         public override int PetStackMax => dmgStacksMax;
@@ -55,8 +51,8 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && item.CountsAsClass<MeleeDamageClass>())
             {
-                target.AddBuff(ModContent.BuffType<Irradiated>(), 300);
-                target.AddBuff(ModContent.BuffType<CrushDepth>(), 300);
+                target.AddBuff(ModContent.BuffType<Irradiated>(), debuffDuration);
+                target.AddBuff(ModContent.BuffType<CrushDepth>(), debuffDuration);
                 if (currentStacks < dmgStacksMax)
                 {
                     currentStacks++;
@@ -84,7 +80,7 @@ namespace POCalValAddon.PetEffects
                 timer = 0;
             }
         }
-        
+
         public sealed class SharkHeartPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => sharkHeart;
@@ -98,7 +94,14 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<SharkHeart>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.SharkHeart");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.SharkHeart")
+                .Replace("<dmg>", PetUtil.FloatToPercent(sharkHeart.dmgIncrease))
+                .Replace("<stacks>", sharkHeart.currentStacks.ToString())
+                .Replace("<maxStack>", sharkHeart.dmgStacksMaxNormal.ToString())
+                .Replace("<sandstorm>", sharkHeart.dmgStacksMaxSandstorm.ToString())
+                .Replace("<lose>", PetUtil.IntToTime(sharkHeart.dmgBuffDuration))
+                .Replace("<secs>", PetUtil.IntToTime(sharkHeart.debuffDuration));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.SharkHeart");
         }
     }
 }

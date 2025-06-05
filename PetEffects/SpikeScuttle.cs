@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul;
+﻿using System.Collections.Generic;
+using CalValEX.Items.Pets.Scuttlers;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
-using PetsOverhaul.NPCs;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets.Scuttlers;
-using System.Security.Cryptography.X509Certificates;
-using POCalValAddon.Systems;
-using PetsOverhaul.PetEffects;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace POCalValAddon.PetEffects
 {
@@ -23,33 +15,13 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
 
-        public List<int> GemWeapons =
-        [
-            ItemID.BluePhaseblade, ItemID.BluePhasesaber, ItemID.SapphireStaff,         //Sapphire Weapons
-            ItemID.RedPhaseblade, ItemID.RedPhasesaber, ItemID.RubyStaff,               //Ruby Weapons
-            ItemID.PurplePhaseblade, ItemID.PurplePhasesaber, ItemID.AmethystStaff,     //Amethyst Weapons
-            ItemID.GreenPhaseblade, ItemID.GreenPhasesaber, ItemID.EmeraldStaff,        //Emerald Weapons
-            ItemID.WhitePhaseblade, ItemID.WhitePhasesaber, ItemID.DiamondStaff,        //Diamond Weapons
-            ItemID.YellowPhaseblade, ItemID.YellowPhasesaber, ItemID.TopazStaff,        //Topaz Weapons
-            ItemID.OrangePhaseblade, ItemID.OrangePhasesaber, ItemID.AmberStaff,        //Amber Weapons
-        ];
-
-        public static List<int> GemTypes =
-        [
-            ItemID.Sapphire,
-            ItemID.Ruby,
-            ItemID.Amethyst,
-            ItemID.Emerald,
-            ItemID.Diamond,
-            ItemID.Topaz,
-            ItemID.Amber,
-        ];
+        //For lists used in this Pet, reference to CalValItemSets in CVAGlobalPet.
 
         public int defenseStat = 20;
         public float weaponBuff = 0.4f;
         public int robeDef = 10;
         public int robeMana = 40;
-        public int scuttleGemMult = 500;
+        public int scuttleGemMult = 50;
         public float ammoBuff = 0.30f;
 
         public override void PostUpdateMiscEffects()
@@ -62,7 +34,7 @@ namespace POCalValAddon.PetEffects
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (PetIsEquipped() && GemWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemWeapons[item.type])
             {
                 damage += weaponBuff;
             }
@@ -71,23 +43,12 @@ namespace POCalValAddon.PetEffects
                 damage += ammoBuff;
             }
         }
-    
 
         public sealed class ScuttleArmor : GlobalItem
         {
-            public static List<int> GemRobes =
-            [
-                ItemID.SapphireRobe,
-                ItemID.RubyRobe,
-                ItemID.AmethystRobe,
-                ItemID.EmeraldRobe,
-                ItemID.DiamondRobe,
-                ItemID.TopazRobe,
-                ItemID.AmberRobe,
-            ];
             public override bool AppliesToEntity(Item entity, bool lateInstantiation)
             {
-                return GemRobes.Contains(entity.type);
+                return CalValItemSets.GemRobes[entity.type];
             }
             public override void UpdateEquip(Item item, Player player)
             {
@@ -137,7 +98,7 @@ namespace POCalValAddon.PetEffects
                         tooltips.Find(x => x.Name == "Defense").Text = def.ToString() + " defense";
 
                     if (tooltips.Find(x => x.Name == "Tooltip0") != null)
-                        tooltips.Find(x => x.Name == "Tooltip0").Text = Language.GetTextValue("Mods.POCalValAddon.ItemTooltips.ManaRobe").Replace("<mana>", mana.ToString());
+                        tooltips.Find(x => x.Name == "Tooltip0").Text = PetUtil.LocVal("ItemTooltips.ManaRobe").Replace("<mana>", mana.ToString());
                 }
             }
         }
@@ -152,9 +113,9 @@ namespace POCalValAddon.PetEffects
             SpikeScuttle spikeJewel = player.GetModPlayer<SpikeScuttle>();
             if (PickerPet.PickupChecks(item, spikeJewel.PetItemID, out ItemPet itemChck) && itemChck.oreBoost)
             {
-                if (GemTypes.Contains(item.type))
+                if (CalValItemSets.GemTypes[item.type])
                 {
-                    for (int i = 0; i < GlobalPet.Randomizer(spikeJewel.scuttleGemMult * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer(spikeJewel.scuttleGemMult * item.stack, 100); i++)
                     {
                         player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                     }
@@ -174,7 +135,13 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<SpikeScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.SpikeScuttle");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Scuttlers.SpikeScuttle")
+                .Replace("<dmg>", PetUtil.FloatToPercent(bejSpike.weaponBuff))
+                .Replace("<ammoDmg>", PetUtil.FloatToPercent(bejSpike.ammoBuff))
+                .Replace("<robeDef>", bejSpike.robeDef.ToString())
+                .Replace("<mana>", bejSpike.robeMana.ToString())
+                .Replace("<chance>", bejSpike.scuttleGemMult.ToString() + "%");
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Scuttlers.SpikeScuttle");
         }
     }
 }

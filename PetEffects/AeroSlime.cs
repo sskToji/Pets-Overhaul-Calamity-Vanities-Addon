@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Items;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using PetsOverhaul.PetEffects;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets;
 
 //Idea by @iamnamedmuffin
 
@@ -19,11 +14,13 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<AerialiteBubble>();
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
+        public float WingtimeIncrease = 0.1f;
+
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
-                Player.wingTimeMax += (int)(Player.wingTimeMax * 0.1);
+                Player.wingTimeMax += (int)(Player.wingTimeMax * WingtimeIncrease);
                 Player.AddBuff(BuffID.Featherfall, 1);
             }
         }
@@ -37,11 +34,13 @@ namespace POCalValAddon.PetEffects
                 {
                     if (Main.LocalPlayer.TryGetModPlayer(out AeroSlime pet))
                         return pet;
-                    else 
+                    else
                         return ModContent.GetInstance<AeroSlime>();
                 }
             }
-        public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.AeroSlime");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.AeroSlime")
+                    .Replace("<wing>", PetUtil.FloatToPercent(aeroSlime.WingtimeIncrease));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.AeroSlime");
         }
     }
 }

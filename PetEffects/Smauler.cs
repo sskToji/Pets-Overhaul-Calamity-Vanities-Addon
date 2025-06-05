@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Buffs.StatDebuffs;
+﻿using CalamityMod.Buffs.StatDebuffs;
 using CalamityMod.Dusts;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -19,17 +14,18 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
         public float radiusSmauler = 300f;
+        public int debuffTime = 300;
 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, ModContent.DustType<AuricBarDust>(), (int)radiusSmauler, dustAmount: 64);
-                foreach(NPC item in Main.ActiveNPCs)
+                foreach (NPC item in Main.ActiveNPCs)
                 {
                     if (item.Distance(Player.Center) <= radiusSmauler)
                     {
-                        item.AddBuff(ModContent.BuffType<Irradiated>(), 300);
+                        item.AddBuff(ModContent.BuffType<Irradiated>(), debuffTime);
                     }
                 }
             }
@@ -48,7 +44,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<Smauler>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Smauler");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Smauler")
+                .Replace("<px>", smauler.radiusSmauler.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(smauler.debuffTime));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Smauler");
         }
     }
 }

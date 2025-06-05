@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CalValEX.Items.Pets;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.GameInput;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -24,10 +20,12 @@ namespace POCalValAddon.PetEffects
         public int mirrorHitMax = 5;
         public int mirrorCooldown = 5400;
         public float mirrorReduction = 0.55f;
+        public float mirrorReflect = 0.55f;
+        public bool mirrorBool = false;
         //Stasis Drone
         public float droneMovespeed = 0.2f;
         public float droneAccelspeed = 0.15f;
-        public float droneWingSpeed = 0.25f;
+        public float droneWingspeed = 0.25f;
         //Baby Signus
         public int signusActiveDmg = 150;
         public int trigger = -1;
@@ -56,8 +54,27 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped() && mirrorHit > 0)
             {
                 modifiers.FinalDamage *= mirrorReduction; //45% Damage Reduction
-                Player.thorns += 6;
+                mirrorBool = true;
                 mirrorHit--;
+            }
+            else mirrorBool = false;
+        }
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (PetIsEquipped() && mirrorBool == true)
+            {
+                if (info.DamageSource.TryGetCausingEntity(out Entity entity))
+                {
+                    int damageTaken = Math.Min(info.SourceDamage, Player.statLife);
+                    if (entity is Projectile projectile && projectile.TryGetGlobalProjectile(out ProjectileSourceChecks proj) && Main.npc[proj.sourceNpcId].active && Main.npc[proj.sourceNpcId].dontTakeDamage == false)
+                    {
+                        Main.npc[proj.sourceNpcId].SimpleStrikeNPC(Main.DamageVar(Pet.PetDamage(damageTaken * mirrorReflect, DamageClass.Generic), Player.luck), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                    }
+                    else if (entity is NPC npc && npc.active == true && npc.dontTakeDamage == false)
+                    {
+                        npc.SimpleStrikeNPC(Main.DamageVar(Pet.PetDamage(damageTaken * mirrorReflect, DamageClass.Generic), Player.luck), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                    }
+                }
             }
         }
         public override void PostUpdateMiscEffects()
@@ -83,7 +100,7 @@ namespace POCalValAddon.PetEffects
             {
                 Player.moveSpeed += droneMovespeed;
             }
-            
+
         }
         public override void PostUpdateRunSpeeds()
         {
@@ -102,7 +119,7 @@ namespace POCalValAddon.PetEffects
             {
                 if (player.TryGetModPlayer(out SlayerDoll slayerDoll) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ModContent.ItemType<GodSlayerDoll>()) && player.ZoneRain is not false)
                 {
-                    speed += slayerDoll.droneWingSpeed;
+                    speed += slayerDoll.droneWingspeed;
                 }
             }
         }
@@ -119,8 +136,16 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<SlayerDoll>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.SlayerDoll")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.SlayerDoll")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<reflect>", PetUtil.FloatToPercent(slayerDoll.mirrorReflect))
+                .Replace("<hitCount>", slayerDoll.mirrorHitMax.ToString())
+                .Replace("<scytheDmg>", slayerDoll.signusActiveDmg.ToString())
+                .Replace("<cd>", PetUtil.IntToTime(slayerDoll.mirrorCooldown))
+                .Replace("<speed>", PetUtil.FloatToPercent(slayerDoll.droneMovespeed))
+                .Replace("<>wing", PetUtil.FloatToPercent(slayerDoll.droneWingspeed))
+                .Replace("<run>", PetUtil.FloatToPercent(slayerDoll.droneAccelspeed));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.SlayerDoll").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using CalamityMod.Buffs.DamageOverTime;
+using CalamityMod.Dusts;
+using CalamityMod.Projectiles.Healing;
+using CalValEX.Items.Pets.Elementals;
 using Microsoft.Xna.Framework;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul.Systems;
-using CalamityMod.Dusts;
-using CalamityMod.Projectiles.Healing;
-using CalamityMod.Buffs.DamageOverTime;
-using CalValEX.Items.Pets.Elementals;
 
 namespace POCalValAddon.PetEffects
 {
@@ -25,43 +24,45 @@ namespace POCalValAddon.PetEffects
         public float radiusStorm = 240f;
         public float radiusWater = 240f;
         public float movementSpeed = 0.25f;
+        public int debuffTime = 300;
 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
-                //Effects and visuals gained from Brimstone Elemental (Circle of Fire)
+                //Brimstone Elemental
                 GlobalPet.CircularDustEffect(Player.Center, ModContent.DustType<BrimstoneFlame>(), (int)radiusFire, dustAmount: 64);
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, (int)radiusFire, dustAmount: 32);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
                     if (item.Distance(Player.Center) <= radiusFire)
                     {
-                        item.AddBuff(ModContent.BuffType<BrimstoneFlames>(), 300);
+                        item.AddBuff(ModContent.BuffType<BrimstoneFlames>(), debuffTime);
                     }
                 }
-                //Effects gained from Cloud Elemental (Movement Speed)
+                //Cloud Elemental
                 Player.moveSpeed += movementSpeed;
 
-                //Effects gained from Rare Sand Elemental (Healing orb)
+                //Rare Sand Elemental (heal orbs)
                 if (Pet.timer <= 0)
                 {
                     Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), Player.Center - Main.rand.NextVector2Circular(radiusHeal, radiusHeal), -Vector2.UnitY * 6f, ModContent.ProjectileType<CactusHealOrb>(), 0, 0, Player.whoAmI);
                     Pet.timer = Pet.timerMax;
                 }
-                //Effects Gained from Anahita/Water Elemental (Slowing circle)
+
+                //Water Elemental
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Water, (int)radiusWater, dustAmount: 32);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
                     if (item.Distance(Player.Center) <= radiusWater)
                     {
-                        item.AddBuff(BuffID.Slow, 300);
+                        item.AddBuff(BuffID.Slow, debuffTime);
                     }
                 }
 
             }
         }
-        //To check if Player is damaged for Sand Elemental, and applying Confused Debuff
+        //Sand Elemental
         public override void OnHurt(Player.HurtInfo info)
         {
             if (PetIsEquipped())
@@ -71,13 +72,13 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusStorm)
                     {
-                        item.AddBuff(BuffID.Confused, 300);
+                        item.AddBuff(BuffID.Confused, debuffTime);
                     }
                 }
             }
         }
 
-        public sealed class MiniHeartPetItem : PetTooltip //Tooltip
+        public sealed class MiniHeartPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => miniHeart;
             public static MiniHeart miniHeart
@@ -90,7 +91,15 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<MiniHeart>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.MiniatureElementalHeart");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.MiniatureElementalHeart")
+                .Replace("<pxFire>", miniHeart.radiusFire.ToString())
+                .Replace("<pxWater>", miniHeart.radiusWater.ToString())
+                .Replace("<pxHeal>", miniHeart.radiusHeal.ToString())
+                .Replace("<pxDust>", miniHeart.radiusStorm.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(miniHeart.debuffTime))
+                .Replace("<speed>", PetUtil.FloatToPercent(miniHeart.movementSpeed))
+                .Replace("<cd>", PetUtil.IntToTime(miniHeart.miniHeartCooldown));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.MiniatureElementalHeart");
         }
     }
 }

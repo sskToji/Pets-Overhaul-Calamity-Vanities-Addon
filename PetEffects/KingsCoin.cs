@@ -1,19 +1,10 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Steamworks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul;
-using PetsOverhaul.Items;
-using PetsOverhaul.Systems;
 using CalValEX.Items.Pets;
-using System.Security.Cryptography.X509Certificates;
-using Terraria.DataStructures;
-using CalamityMod;
-using Terraria.GameInput;
-using CalamityMod.Projectiles.Melee;
+using Microsoft.Xna.Framework;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -27,8 +18,7 @@ namespace POCalValAddon.PetEffects
         public int kingCooldown = 300;
         public float hpTreshold = 0.2f;
         public float baseHpShield = 0.1f;
-        public int driedCooldown = 300;
-        public int driedShieldDuration = 900;
+        public int kingShieldDuration = 900;
         private int lifeguardMultTimer = 0;
         public float moistRadius = 20f;
         public int trigger = -1;
@@ -79,11 +69,11 @@ namespace POCalValAddon.PetEffects
                             CombatText.NewText(Player.getRect(), Color.DarkGreen, -reduce);
                         }
                         info.Damage -= reduce;
-                        Pet.AddShield(shieldAmount - reduce, driedShieldDuration, false);
+                        Pet.AddShield(shieldAmount - reduce, kingShieldDuration, false);
 
                         trigger = 100;
                         Pet.timer = Pet.timerMax;
-                        lifeguardMultTimer = driedShieldDuration;
+                        lifeguardMultTimer = kingShieldDuration;
                     }
                 };
             }
@@ -101,9 +91,14 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<KingsCoin>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.KingsCoin")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetAbilitySwitch))
-                .Replace("<ability>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.KingsCoin")
+                .Replace("<minHp>", PetUtil.FloatToPercent(kingCoin.hpTreshold))
+                .Replace("<health>", PetUtil.FloatToPercent(kingCoin.baseHpShield))
+                .Replace("<spear>", kingCoin.moistDmg.ToString())
+                .Replace("<cd>", PetUtil.IntToTime(kingCoin.kingCooldown))
+                .Replace("<shield>", PetUtil.IntToTime(kingCoin.kingShieldDuration))
+                .Replace("<speed>", PetUtil.FloatToPercent(kingCoin.kingMovement));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.KingsCoin");
         }
     }
 }

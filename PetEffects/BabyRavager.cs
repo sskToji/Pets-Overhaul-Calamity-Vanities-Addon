@@ -1,15 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Steamworks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul;
-using PetsOverhaul.Items;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using CalValEX.Items.Pets;
-using System.Security.Cryptography.X509Certificates;
+using POCalValAddon.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -20,7 +13,7 @@ namespace POCalValAddon.PetEffects
 
         public float ravaDmg = 0.1f;
         public float ravaCrit = 0.05f;
-        public float ravaHurt = 1.2f;
+        public float ravaHurt = 0.2f;
         public float ravaMult = 0.01f;
         public float ravaDmgTotal;
 
@@ -44,11 +37,11 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                modifiers.FinalDamage *= ravaHurt;
+                modifiers.FinalDamage *= ravaHurt + 1f;
             }
         }
 
-       public sealed class BabyRavagerPetItem : PetTooltip
+        public sealed class BabyRavagerPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => babyRava;
             public static BabyRavager babyRava
@@ -61,7 +54,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyRavager>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.BabyRavager");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.BabyRavager")
+                .Replace("<perc>", PetUtil.FloatToPercent(babyRava.ravaDmg))
+                .Replace("<dmg>", PetUtil.FloatToPercent(babyRava.ravaDmgTotal * babyRava.ravaMult))
+                .Replace("<crit>", PetUtil.FloatToPercent((babyRava.Player.statLifeMax2 + babyRava.Player.statDefense) * babyRava.ravaCrit * 0.01f))
+                .Replace("<take>", PetUtil.FloatToPercent(babyRava.ravaHurt));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.BabyRavager");
         }
     }
 }

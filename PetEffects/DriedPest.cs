@@ -1,17 +1,10 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Steamworks;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul;
-using PetsOverhaul.Items;
-using PetsOverhaul.Systems;
 using CalValEX.Items.Pets;
-using System.Security.Cryptography.X509Certificates;
-using Terraria.DataStructures;
-using CalamityMod;
+using Microsoft.Xna.Framework;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -49,7 +42,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && Pet.timer <= 0)
             {
-                int shieldAmount = (int)((Player.statLifeMax * baseHpShield));
+                int shieldAmount = (int)(Player.statLifeMax * baseHpShield);
 
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
                 {
@@ -87,7 +80,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<DriedPest>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.DriedPest");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.DriedPest")
+                .Replace("<health>", PetUtil.FloatToPercent(desertPest.hpTreshold))
+                .Replace("<shield>", PetUtil.FloatToPercent(desertPest.baseHpShield))
+                .Replace("<cd>", PetUtil.IntToTime(desertPest.driedCooldown))
+                .Replace("<speed>", PetUtil.FloatToPercent(desertPest.desertMovement));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.DriedPest");
         }
     }
 }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod;
+﻿using CalamityMod;
 using CalamityMod.Buffs.DamageOverTime;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -20,20 +15,23 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Melee;
         public override PetClasses PetClassSecondary => PetClasses.Rogue;
 
+        public int meleeHitTime = 300;
+        public int otherHitTime = 150;
+
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (PetIsEquipped() && item.CountsAsClass<MeleeDamageClass>())
             {
-                target.AddBuff(ModContent.BuffType<BurningBlood>(), 300);
-                target.AddBuff(BuffID.Ichor, 300);
+                target.AddBuff(ModContent.BuffType<BurningBlood>(), meleeHitTime);
+                target.AddBuff(BuffID.Ichor, meleeHitTime);
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (PetIsEquipped() && (proj.CountsAsClass<RogueDamageClass>() || proj.CountsAsClass<MeleeDamageClass>()))
             {
-                target.AddBuff(ModContent.BuffType<BurningBlood>(), 150);
-                target.AddBuff(BuffID.Ichor, 150);
+                target.AddBuff(ModContent.BuffType<BurningBlood>(), otherHitTime);
+                target.AddBuff(BuffID.Ichor, otherHitTime);
             }
         }
 
@@ -50,7 +48,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<WormTumor>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.WormTumor");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.WormTumor")
+                .Replace("<hit>", PetUtil.IntToTime(wormTumor.otherHitTime))
+                .Replace("<meleeHit>", PetUtil.IntToTime(wormTumor.meleeHitTime));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.WormTumor");
         }
     }
 }

@@ -1,14 +1,10 @@
-﻿using System.Text;
-using System.Threading.Tasks;
-using PetsOverhaul.Systems;
-using PetsOverhaul;
-using PetsOverhaul.Items;
-using Terraria.ModLoader;
+﻿using CalamityMod.Dusts;
 using CalValEX.Items.Pets.Elementals;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
-using CalamityMod.Dusts;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -18,6 +14,8 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
 
         public float radiusFire = 160f;
+        public int debuffTime = 300;
+
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
@@ -28,7 +26,7 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusFire)
                     {
-                        item.AddBuff(BuffID.OnFire, 300);
+                        item.AddBuff(BuffID.OnFire, debuffTime);
                     }
                 }
             }
@@ -46,7 +44,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyBrimling>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.BabyBrimling");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.BabyBrimling")
+                .Replace("<px>", babyBrimling.radiusFire.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(babyBrimling.debuffTime));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.BabyBrimling");
         }
     }
 }

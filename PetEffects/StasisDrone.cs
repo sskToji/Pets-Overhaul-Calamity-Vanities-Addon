@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalValEX.Items.Pets;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.GameInput;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 //change wing to speed, not time
@@ -21,7 +15,7 @@ namespace POCalValAddon.PetEffects
 
         public float droneMovespeed = 0.2f;
         public float droneAccelspeed = 0.2f;
-        public float droneWingSpeed = 0.2f;
+        public float droneWingspeed = 0.2f;
 
         public override void PostUpdateMiscEffects()
         {
@@ -35,7 +29,7 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped() && Player.ZoneRain is not false)
             {
                 Player.runAcceleration *= droneAccelspeed + 1f;
-                
+
             }
         }
         public sealed class StasisDroneWing : GlobalItem
@@ -46,7 +40,7 @@ namespace POCalValAddon.PetEffects
             {
                 if (player.TryGetModPlayer(out StasisDrone stasisDrone) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ModContent.ItemType<ArmoredScrap>()) && player.ZoneRain is not false)
                 {
-                    speed += stasisDrone.droneWingSpeed;
+                    speed += stasisDrone.droneWingspeed;
                 }
             }
         }
@@ -64,7 +58,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<StasisDrone>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.StasisDrone");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.StasisDrone")
+                .Replace("<speed>", PetUtil.FloatToPercent(stasisDrone.droneMovespeed))
+                .Replace("<wing>", PetUtil.FloatToPercent(stasisDrone.droneWingspeed))
+                .Replace("<run>", PetUtil.FloatToPercent(stasisDrone.droneAccelspeed));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.StasisDrone");
         }
     }
 }

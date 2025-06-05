@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalValEX.Items.Pets;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using Terraria.ID;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.ModLoader;
-using static POCalValAddon.PetEffects.EggBaby;
 using Terraria.DataStructures;
-using System.Reflection.Metadata.Ecma335;
-using Terraria.Localization;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -21,7 +14,8 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
 
         public int gelConsume = 0;
-        public float summonDmg = 1.2f;
+        public int gelConsumeMax = 30;
+        public float summonDmg = 0.2f;
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -29,13 +23,13 @@ namespace POCalValAddon.PetEffects
             {
                 if (gelConsume > 0)
                 {
-                    modifiers.FinalDamage *= summonDmg;
+                    modifiers.FinalDamage += summonDmg;
                     gelConsume--;
                 }
                 else if (gelConsume == 0)
                 {
                     Player.ConsumeItem(ItemID.Gel);
-                    gelConsume = 30;
+                    gelConsume = gelConsumeMax;
                 }
             }
         }
@@ -69,7 +63,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<JellyCrystal>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.JellyCrystal");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.JellyCrystal")
+                .Replace("<dmg>", PetUtil.FloatToPercent(jellyCrystal.summonDmg))
+                .Replace("<gel>", jellyCrystal.gelConsumeMax.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.JellyCrystal");
         }
     }
 }

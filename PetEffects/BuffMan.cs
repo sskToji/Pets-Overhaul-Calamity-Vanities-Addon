@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Buffs.DamageOverTime;
+﻿using CalamityMod.Buffs.DamageOverTime;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -24,6 +19,7 @@ namespace POCalValAddon.PetEffects
         public int dmgStacksMax = 10;
         public int dmgStacksMaxSandstorm = 15;
         public float dmgIncrease = 0.02f;
+        public int crushDepthDuration = 300;
 
         //public override int PetStackCurrent => currentStacks;
         //public override int PetStackMax => dmgStacksMax;
@@ -45,7 +41,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && item.CountsAsClass<MeleeDamageClass>())
             {
-                target.AddBuff(ModContent.BuffType<CrushDepth>(), 300);
+                target.AddBuff(ModContent.BuffType<CrushDepth>(), crushDepthDuration);
                 if (currentStacks < dmgStacksMax)
                 {
                     currentStacks++;
@@ -87,7 +83,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BuffMan>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.BuffMan");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.BuffMan")
+                .Replace("<stack>", buffMan.dmgStacksMax.ToString())
+                .Replace("<secs>", PetUtil.IntToTime(buffMan.dmgBuffDuration))
+                .Replace("<debuff>", PetUtil.IntToTime(buffMan.crushDepthDuration));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.BuffMan");
         }
     }
 }

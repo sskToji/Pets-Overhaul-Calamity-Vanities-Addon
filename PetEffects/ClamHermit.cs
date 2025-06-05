@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Items.Accessories;
-using CalValEX.Items.Pets;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -18,19 +12,19 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
 
-        public int clamBreath = 50; //200 is base, so 50 is a 25% increase
+        public float clamBreath = 0.25f;
         public float clamDmg = 0.1f;
 
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
-                Player.breathMax += clamBreath;
+                Player.breathEffectiveness += clamBreath;
             }
         }
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
-        { 
+        {
             if (PetIsEquipped() && (Player.wet == true) && (Player.lavaWet == false) && (Player.honeyWet == false) && (Player.shimmerWet == false))
             {
                 damage += clamDmg;
@@ -50,7 +44,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<ClamHermit>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.ClamHermit");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.ClamHermit")
+                .Replace("<breath>", PetUtil.FloatToPercent(clamHermit.clamBreath))
+                .Replace("<dmg>", PetUtil.FloatToPercent(clamHermit.clamDmg));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.ClamHermit");
         }
     }
 }

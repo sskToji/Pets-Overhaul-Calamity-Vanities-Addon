@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalValEX.Items.Pets;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using Terraria.GameInput;
+using POCalValAddon.Systems;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader;
-using Steamworks;
-using Terraria.Localization;
 
 namespace POCalValAddon.PetEffects
 {
@@ -64,8 +58,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabySignus>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.BabySignus")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.BabySignus")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<summon>", PetUtil.FloatToPercent(babySignus.signusSummonDmg))
+                .Replace("<cd>", PetUtil.IntToTime(babySignus.signusCooldown))
+                .Replace("<summon>", babySignus.signusActiveDmg.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.BabySignus").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

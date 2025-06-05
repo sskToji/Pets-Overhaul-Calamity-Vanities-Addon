@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod;
-using CalamityMod.Items.Weapons.Melee;
-using CalamityMod.Items.Weapons.Ranged;
-using CalamityMod.Items.Weapons.Rogue;
-using CalamityMod.Items.Weapons.Summon;
+﻿using CalamityMod;
 using CalValEX.Items.Pets.ExoMechs;
 using PetsOverhaul.Systems;
-using Steamworks;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -24,72 +14,58 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
 
         public float gemMeleeDmg = 0.3f;
-        public float gemMeleeCrit = 0.25f;
+        public float gemMeleeCrit = 0.5f;
         public float gemRogueDmg = 0.3f;
-        public float gemRogueCrit = 0.25f;
+        public float gemRogueCrit = 0.5f;
         public float gemRangedDmg = 0.3f;
         public float gemRangedUse = 0.4f;
         public float gemSummonDmg = 0.3f;
         public float gemWeaponDmg = 0.15f;
-        public float gemWeaponCrit = 0.15f;
-
-        public static List<int> GemMeleeWeapons =
-        [
-            ModContent.ItemType<PhotonRipper>(),
-            ModContent.ItemType<SpineOfThanatos>(),
-        ];
-        public static List<int> GemRangedWeapons =
-        [
-            ModContent.ItemType<SurgeDriver>(),
-            ModContent.ItemType<TheJailor>(),
-        ];
-        public static List<int> GemRogueWeapons =
-        [
-            ModContent.ItemType<TheAtomSplitter>(),
-            ModContent.ItemType<RefractionRotor>(),
-        ];
-        public static List<int> GemSummonWeapons =
-        [
-            ModContent.ItemType<AresExoskeleton>(),
-            ModContent.ItemType<AtlasMunitionsBeacon>(),
-        ];
+        public float gemWeaponCrit = 0.25f;
 
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            if (PetIsEquipped() && GemMeleeWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemMelee[item.type])
             {
-                crit += gemMeleeCrit;
+                crit *= 1f + gemMeleeCrit;
             }
-            if (PetIsEquipped() && GemRogueWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemRogue[item.type])
             {
-                crit += gemRogueCrit;
+                crit *= 1f + gemRogueCrit;
             }
-            if (PetIsEquipped() && (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<RogueDamageClass>()) && !(GemRogueWeapons.Contains(item.type) || GemMeleeWeapons.Contains(item.type)))
+            if (PetIsEquipped() && (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<RogueDamageClass>()) && !(CalValItemSets.GemRogue[item.type] || CalValItemSets.GemMelee[item.type]))
             {
-                crit += gemWeaponCrit;
+                crit *= 1f + gemWeaponCrit;
             }
         }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (PetIsEquipped() && GemMeleeWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemMelee[item.type])
             {
                 damage += gemMeleeDmg;
             }
-            if (PetIsEquipped() && GemRogueWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemRogue[item.type])
             {
                 damage += gemRogueDmg;
             }
-            if (PetIsEquipped() && GemRangedWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemRanged[item.type])
             {
                 damage += gemRangedDmg;
             }
-            if (PetIsEquipped() && GemSummonWeapons.Contains(item.type))
+            if (PetIsEquipped() && CalValItemSets.GemSummon[item.type])
             {
                 damage += gemSummonDmg;
             }
-            if (PetIsEquipped() && (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<RogueDamageClass>()) && !(GemRogueWeapons.Contains(item.type) || GemMeleeWeapons.Contains(item.type)))
+            if (PetIsEquipped() && (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<RogueDamageClass>() || item.CountsAsClass<SummonDamageClass>() || item.CountsAsClass<RangedDamageClass>()) && !(CalValItemSets.GemRogue[item.type] || CalValItemSets.GemMelee[item.type]))
             {
                 damage += gemWeaponDmg;
+            }
+        }
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (PetIsEquipped() && proj.GetGlobalProjectile<GemProjectile>().gemProj == true && (proj.CountsAsClass<SummonDamageClass>() || proj.CountsAsClass<RangedDamageClass>()))
+            {
+                modifiers.FinalDamage += gemWeaponDmg;
             }
         }
         public override void PostUpdateMiscEffects()
@@ -97,6 +73,22 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped())
             {
                 Player.GetAttackSpeed<RangedDamageClass>() += gemRangedUse;
+            }
+        }
+        public sealed class GemProjectile : GlobalProjectile
+        {
+            public override bool InstancePerEntity => true;
+            public bool gemProj = false;
+            public override void OnSpawn(Projectile projectile, IEntitySource source)
+            {
+                if (source is EntitySource_ItemUse item && item.Item is not null)
+                {
+                    gemProj = true;
+                }
+                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<GemProjectile>().gemProj == true)
+                {
+                    gemProj = true;
+                }
             }
         }
         public sealed class ExoGemPetItem : PetTooltip
@@ -112,7 +104,17 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<ExoGem>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.ExoMechs.ExoGemstone");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.ExoMechs.ExoGemstone")
+                .Replace("<dmg>", PetUtil.FloatToPercent(gemBabies.gemWeaponDmg))
+                .Replace("<crit>", PetUtil.FloatToPercent(gemBabies.gemWeaponCrit))
+                .Replace("<meleeDmg>", PetUtil.FloatToPercent(gemBabies.gemMeleeDmg))
+                .Replace("<meleeCrit>", PetUtil.FloatToPercent(gemBabies.gemMeleeCrit))
+                .Replace("<rogueDmg>", PetUtil.FloatToPercent(gemBabies.gemRogueDmg))
+                .Replace("<rogueCrit>", PetUtil.FloatToPercent(gemBabies.gemRogueCrit))
+                .Replace("<rangedDmg>", PetUtil.FloatToPercent(gemBabies.gemRangedDmg))
+                .Replace("<use>", PetUtil.FloatToPercent(gemBabies.gemRangedUse))
+                .Replace("<summonDmg>", PetUtil.FloatToPercent(gemBabies.gemSummonDmg));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.ExoMechs.ExoGemstone");
         }
     }
 }

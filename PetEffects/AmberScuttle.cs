@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul;
+﻿using System.Collections.Generic;
+using CalValEX.Items.Pets.Scuttlers;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets.Scuttlers;
-using System.Security.Cryptography.X509Certificates;
-using POCalValAddon.Systems;
-using PetsOverhaul.PetEffects;
 
 namespace POCalValAddon.PetEffects
 {
@@ -24,7 +19,7 @@ namespace POCalValAddon.PetEffects
         public int defenseStat = 5;
         public int robeDef = 4;
         public int robeMana = 10;
-        public int scuttleGemMult = 500;
+        public int scuttleGemMult = 50;
         public float weaponDmg = 0.25f;
         public int amberMana = 70;
 
@@ -35,7 +30,7 @@ namespace POCalValAddon.PetEffects
                 Player.statDefense += defenseStat;
             }
         }
-        
+
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
         {
             if (PetIsEquipped() && (item.type == ItemID.AmberStaff || item.type == ItemID.OrangePhaseblade))
@@ -92,13 +87,13 @@ namespace POCalValAddon.PetEffects
             AmberScuttle ambgeode = player.GetModPlayer<AmberScuttle>();
             if (PickerPet.PickupChecks(item, ambgeode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Amber)
             {
-                for (int i = 0; i < GlobalPet.Randomizer(ambgeode.scuttleGemMult * item.stack, 1000); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(ambgeode.scuttleGemMult * item.stack, 100); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                 }
             }
         }
-        
+
         public sealed class AmberScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => ambScuttle;
@@ -112,7 +107,17 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<AmberScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.AmberScuttle");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Amber")
+                .Replace("<color>", "Orange")
+                .Replace("<def>", ambScuttle.defenseStat.ToString())
+                .Replace("<dmg>", PetUtil.FloatToPercent(ambScuttle.weaponDmg))
+                .Replace("<robeDef>", ambScuttle.robeDef.ToString())
+                .Replace("<mana>", ambScuttle.robeMana.ToString())
+                .Replace("<chance>", ambScuttle.scuttleGemMult.ToString() + "%");
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Amber")
+                .Replace("<color>", "Orange");
         }
     }
 }

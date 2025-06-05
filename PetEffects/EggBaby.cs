@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.Items.Weapons.Summon;
+﻿using CalamityMod.Items.Weapons.Summon;
 using CalValEX;
 using CalValEX.Items.Pets;
-using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -21,14 +13,14 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<AstraEGGeldon>();
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
 
-        public float summonDmg = 1.2f;
-        
+        public float summonDmg = 0.2f;
+
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (PetIsEquipped() && Player.HasItem(ModContent.ItemType<AbandonedSlimeStaff>()))
             {
-                damage *= summonDmg;
+                damage += summonDmg;
             }
         }
 
@@ -52,7 +44,9 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<EggBaby>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.EggBaby");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.EggBaby")
+                .Replace("<dmg>", PetUtil.FloatToPercent(eggBaby.summonDmg));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.EggBaby");
         }
     }
 }

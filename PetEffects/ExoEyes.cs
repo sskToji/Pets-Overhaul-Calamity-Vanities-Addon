@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using CalValEX.Items.Pets.ExoMechs;
-using Terraria;
-using CalamityMod.Items.Weapons.Ranged;
+﻿using CalamityMod.Items.Weapons.Ranged;
 using CalamityMod.Items.Weapons.Rogue;
-using Terraria.Localization;
+using CalValEX.Items.Pets.ExoMechs;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
 
 // TODO : Check for Tooltip updates on Items (CritChance on Atom Splitter)
 
@@ -18,21 +16,17 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<GeminiMarkImplants>();
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
 
-        public float eyesRogueCrit = 0.15f;
+        public float eyesRogueCrit = 0.5f;
         public float eyesRangedUse = 0.2f;
         public float eyesRangedSpeed = 0.1f;
         public int eyesNoUse = 0;
         public static bool eyesWeaponInUse = true;
-        public static List<int> EyesWeapons =
-        [
-            ModContent.ItemType<TheAtomSplitter>(),
-            ModContent.ItemType<SurgeDriver>(),
-        ];
+
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
             if (PetIsEquipped() && (item.type == ModContent.ItemType<TheAtomSplitter>()))
             {
-                crit += eyesRogueCrit;
+                crit *= 1f + eyesRogueCrit;
             }
         }
         public override void PostUpdateMiscEffects()
@@ -46,14 +40,14 @@ namespace POCalValAddon.PetEffects
 
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if(PetIsEquipped() && !EyesWeapons.Contains(item.type))
+            if (PetIsEquipped() && !CalValItemSets.EyesWeapons[item.type])
             {
                 damage *= eyesNoUse;
             }
         }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !EyesWeapons.Contains(item.type))
+            if (PetIsEquipped() && !CalValItemSets.EyesWeapons[item.type])
             {
                 target.takenDamageMultiplier = eyesNoUse;
                 if (target.lifeRegen < 0)
@@ -64,7 +58,7 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !(EyesWeapons.Contains(proj.type) || proj.GetGlobalProjectile<EyesProjectile>().eyesProj))
+            if (PetIsEquipped() && !(CalValItemSets.EyesWeapons[proj.type] || proj.GetGlobalProjectile<EyesProjectile>().eyesProj))
             {
                 target.takenDamageMultiplier = eyesNoUse;
                 if (target.lifeRegen < 0)
@@ -79,7 +73,7 @@ namespace POCalValAddon.PetEffects
             public bool eyesProj = false;
             public override void OnSpawn(Projectile projectile, IEntitySource source)
             {
-                if (source is EntitySource_ItemUse item && item.Item is not null && ExoEyes.EyesWeapons.Contains(item.Item.type))
+                if (source is EntitySource_ItemUse item && item.Item is not null && CalValItemSets.EyesWeapons[item.Item.type])
                 {
                     eyesProj = true;
                 }
@@ -102,7 +96,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<ExoEyes>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.ExoMechs.ExoEyes");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.ExoMechs.ExoEyes")
+                .Replace("<crit>", PetUtil.FloatToPercent(eyesBaby.eyesRogueCrit))
+                .Replace("<use>", PetUtil.FloatToPercent(eyesBaby.eyesRangedUse))
+                .Replace("<speed>", PetUtil.FloatToPercent(eyesBaby.eyesRangedSpeed));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.ExoMechs.ExoEyes");
         }
     }
 }

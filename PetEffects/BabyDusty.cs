@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using CalValEX.Items.Pets.Elementals;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Localization;
-using PetsOverhaul.Systems;
-using CalValEX.Items.Pets.Elementals;
 
 
 namespace POCalValAddon.PetEffects
@@ -16,6 +14,7 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
         public float radiusStorm = 240f;
+        public int debuffTime = 300;
 
         public override void OnHurt(Player.HurtInfo info)
         {
@@ -26,7 +25,7 @@ namespace POCalValAddon.PetEffects
                 {
                     if (item.Distance(Player.Center) <= radiusStorm)
                     {
-                        item.AddBuff(BuffID.Confused, 300);
+                        item.AddBuff(BuffID.Confused, debuffTime);
                     }
                 }
             }
@@ -44,7 +43,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyDusty>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.BabyDusty");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.BabyDusty")
+                .Replace("<secs>", PetUtil.IntToTime(babyDusty.debuffTime))
+                .Replace("<pc>", babyDusty.radiusStorm.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.BabyDusty");
         }
     }
 }

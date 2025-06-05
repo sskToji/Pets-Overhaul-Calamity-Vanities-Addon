@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CalValEX.Items.Pets;
 using Microsoft.Xna.Framework;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Achievements;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-
-//TODO: add way to add fishing power based on bait power
 
 namespace POCalValAddon.PetEffects
 {
@@ -23,19 +17,25 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<CanofWyrms>();
         public override PetClasses PetClassPrimary => PetClasses.Fishing;
 
-        public int wyrmFish = 0;
+        public float baitMod = 0.1f;
 
-        public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)
-        {
-            if (PetIsEquipped())
-            {
-                Player.fishingSkill += bait.bait / 10;
-            }
-        }
         public override void Load()
         {
             On_Projectile.FishingCheck += WyrmPond;
+            On_Player.GetFishingConditions += WyrmFish;
         }
+
+        private static PlayerFishingConditions WyrmFish(On_Player.orig_GetFishingConditions orig, Player self)
+        {
+            var wyrm = new WyrmCan();
+            PlayerFishingConditions condition = orig(self);
+            if (self.miscEquips[0].type == ModContent.ItemType<CanofWyrms>())
+            {
+                condition.FinalFishingLevel += condition.BaitPower * (int)wyrm.baitMod;
+            }
+            return condition;
+        }
+
         private static void GetFishingPondState(int x, int y, out bool lava, out bool honey, out int numWaters, out int chumCount)
         {
             //IL_0094: Unknown result type (might be due to invalid IL or missing references)
@@ -1007,7 +1007,9 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<WyrmCan>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.WyrmCan");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.WyrmCan")
+                .Replace("<bait>", PetUtil.FloatToPercent(wyrmCan.baitMod));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.WyrmCan");
         }
     }
 }

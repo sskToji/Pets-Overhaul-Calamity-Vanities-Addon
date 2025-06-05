@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CalValEX.Items.Pets.Elementals;
 using PetsOverhaul.Systems;
-using PetsOverhaul;
-using PetsOverhaul.Items;
-using Terraria.ModLoader;
-using CalValEX.Items.Pets.Elementals;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
 {
@@ -18,7 +11,7 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<CloudCandy>();
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
-        public float movementSpeed = 0.20f;
+        public float movementSpeed = 0.2f;
 
         public override void PostUpdateMiscEffects()
         {
@@ -41,7 +34,9 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<BabyCloud>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Elementals.BabyCloud");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Elementals.BabyCloud")
+                .Replace("<speed>", PetUtil.FloatToPercent(babyCloud.movementSpeed));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Elementals.BabyCloud");
         }
     }
 }

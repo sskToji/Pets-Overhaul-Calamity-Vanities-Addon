@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Items;
-using PetsOverhaul.Systems;
-using PetsOverhaul.PetEffects;
-using Terraria;
-using Terraria.ID;
-using Terraria.Localization;
-using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets;
 using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Items.Materials;
+using CalValEX.Items.Pets;
+using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
+using Terraria;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ModLoader;
 
 //Idea by @icecontrol33
 
@@ -22,17 +17,17 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<ProfanedChewToy>();
         public override PetClasses PetClassPrimary => PetClasses.Utility;
 
-        public int sneakerChance = 500;
         public float lowChanceThreshold = 0.25f;
         public int chanceToRollDoubleItem = 50;
         public int denominatorMult = 100;
         public int numeratorMult = 200;
+        public float brimRegen = 6f;
 
         public override void UpdateBadLifeRegen()
         {
             if (PetIsEquipped() && Player.HasBuff(ModContent.BuffType<BrimstoneFlames>()))
             {
-                Player.lifeRegen += 6;
+                Player.lifeRegen += (int)brimRegen;
             }
         }
 
@@ -84,7 +79,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<SneakerDude>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.SneakerDude");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.SneakerDude")
+                .Replace("<dmg>", sneaDude.brimRegen.ToString())
+                .Replace("<fort>", sneaDude.chanceToRollDoubleItem.ToString() + "%");
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.SneakerDude");
         }
     }
 }

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul;
+﻿using System.Collections.Generic;
+using CalValEX.Items.Pets.Scuttlers;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets.Scuttlers;
-using System.Security.Cryptography.X509Certificates;
-using POCalValAddon.Systems;
-using PetsOverhaul.PetEffects;
 
 namespace POCalValAddon.PetEffects
 {
@@ -24,7 +19,7 @@ namespace POCalValAddon.PetEffects
         public int defenseStat = 5;
         public int robeDef = 4;
         public int robeMana = 10;
-        public int scuttleGemMult = 500;
+        public int scuttleGemMult = 50;
         public float weaponDmg = 0.25f;
         public int emeraldMana = 50;
 
@@ -92,13 +87,13 @@ namespace POCalValAddon.PetEffects
             EmeraldScuttle emegeode = player.GetModPlayer<EmeraldScuttle>();
             if (PickerPet.PickupChecks(item, emegeode.PetItemID, out ItemPet itemChck) && itemChck.oreBoost && item.type == ItemID.Emerald)
             {
-                for (int i = 0; i < GlobalPet.Randomizer(emegeode.scuttleGemMult * item.stack, 1000); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(emegeode.scuttleGemMult * item.stack, 100); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                 }
             }
         }
-        
+
         public sealed class EmeraldScuttlePetItem : PetTooltip //Tooltip
         {
             public override PetEffect PetsEffect => emeScuttle;
@@ -112,7 +107,17 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<EmeraldScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.EmeraldScuttle");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Emerald")
+                .Replace("<color>", "Green")
+                .Replace("<def>", emeScuttle.defenseStat.ToString())
+                .Replace("<dmg>", PetUtil.FloatToPercent(emeScuttle.weaponDmg))
+                .Replace("<robeDef>", emeScuttle.robeDef.ToString())
+                .Replace("<mana>", emeScuttle.robeMana.ToString())
+                .Replace("<chance>", emeScuttle.scuttleGemMult.ToString() + "%");
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Scuttlers.GenericScuttle")
+                .Replace("<gem>", "Emerald")
+                .Replace("<color>", "Green");
         }
     }
 }

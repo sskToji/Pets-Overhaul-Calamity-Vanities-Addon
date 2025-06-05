@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul;
-using PetsOverhaul.Items;
+﻿using CalValEX.Items.Pets.Scuttlers;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets.Scuttlers;
-using System.Security.Cryptography.X509Certificates;
-using POCalValAddon.Systems;
-using PetsOverhaul.PetEffects;
 
 namespace POCalValAddon.PetEffects
 {
@@ -58,7 +50,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<CrystalScuttle>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Scuttlers.CrystalScuttle");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Scuttlers.CrystalScuttle")
+                .Replace("<def>", cryScuttle.defenseStat.ToString())
+                .Replace("<weaponDmg>", PetUtil.FloatToPercent(cryScuttle.staffBuff))
+                .Replace("<ammoDmg>", PetUtil.FloatToPercent(cryScuttle.ammoBuff));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Scuttlers.CrystalScuttle");
         }
     }
 }

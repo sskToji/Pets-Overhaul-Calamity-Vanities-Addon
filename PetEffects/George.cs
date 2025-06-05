@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CalamityMod.BiomeManagers;
-using CalamityMod.World;
+﻿using CalamityMod.BiomeManagers;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace POCalValAddon.PetEffects
@@ -30,7 +24,7 @@ namespace POCalValAddon.PetEffects
                 Player.aggro -= georgeAggro;
             }
         }
-        
+
         public sealed class GeorgePetItem : PetTooltip
         {
             public override PetEffect PetsEffect => george;
@@ -44,7 +38,10 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<George>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.George");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.George")
+                .Replace("<def>", george.georgeDef.ToString())
+                .Replace("<aggro>", george.georgeAggro.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.George");
         }
     }
 }

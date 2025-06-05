@@ -1,117 +1,438 @@
 Mods: {
 	POCalValAddon: {
+		Misc: {
+			Mins: Minutes
+			Secs: Seconds
+			Sec: Second
+		}
+
 		PetTooltips: {
 			AeroSlime:
 				'''
-				<class>
+				- Increases flight time by <wing>
+				- Gives permanent slow fall
+				'''
+			BabyRavager:
+				'''
+				- Increase your Damage Bonuses by <perc> of Current Health and Defense
+				   * Current Damage increased by <dmg>
+				   * Current Crit Chance increased by <crit>
+				- Increases damage taken by <take>
+				'''
+			BabySignus:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to shoot out Signus Scythes
+				   * These scythes deal <scythe> damage
+				   * This has a <cd> Cooldown
+				- Increases Summon Damage by <summon>
+				'''
+			BrimstoneBerry:
+				'''
+				- Increases flight time by <wing>
+				- Decreases damage taken from Brimstone Flames by <dmg> per Second
+				- Nullifies Brimstone Flames when using Dormant Brimseeker
+				'''
+			BuffMan:
+				'''
+				- When hitting enemies with Melee Weapons, gain damage increasing stacks
+				   * Maximum of <stack> stacks
+				   * When hit, removes all stacks
+				   * This effect wears off after <secs> of not hitting an enemy
+				- When hitting enemies with Melee Weapons, apply Crush Depth for <debuff>
+				'''
+			ClamHermit:
+				'''
+				- Gain <breath> more Breath Time
+				- When underwater, increases Damage of all Weapons by <dmg>
+				'''
+			DriedPest:
+				'''
+				- On cooldown, gain a shield when below <health> HP
+				   * This shield has <shield> of your total Health
+				   * This has a <cd> Cooldown
+				- Increases movement speed in Desert Biomes by <speed>
+				'''
+			EggBaby:
+				'''
+				Use this pet at your own risk!
+				- Increases damage of the Abandoned Slime Staff by <dmg>
+				'''
+			George:
+				'''
+				- Whilst in the Abyss or Sulphurous Sea:
+				   * Gain <def> Defense
+				   * Reduces Enemy Aggression by <aggro>
+				'''
+			GeorgeMecha:
+				'''
+				- Buffs all of Draedon's Arsenal
+				   * Pre Hardmode weapons deal <phm> more Damage
+				   * Hardmode weapons deal <hm> more Damage
+				   * Post Moonlord weapons deal <pml> more Damage
+				- Whilst in the Abyss or Sulphurous Sea
+				   * Reduces Enemy Aggression by <aggro>
+				'''
+			GrandsonShark: - Increases Damage of weapons crafted with "Grand Scale" by <dmg>
+			JellyCrystal:
+				'''
+				- Consume gel to increase Summon and Minion damage
+				   * The gel will automatically be consumed when in your inventory
+				   * Damage increased by <dmg>
+				   * Increased Damage for the next <gel> hits
+				'''
+			JungleNugget:
+				'''
+				- With Rogue and Melee weapons, apply Dragonfire on hit for <secs>
+				- With Non-Yharon dropped Rogue and Melee weapons
+				   * Deal <minusDmg> less Damage
+				- With Yharon dropped Rogue and Melee weapons
+				   * Deal <plusDmg> more Damage
+				'''
+			KingsCoin:
+				'''
+				- On cooldown, when below <minHp> hp
+				  * Gain a temporary shield, this shield is <health> of your Max HP
+				  * Shoot a barrage of Water Spears, these spears deal <spear> Damage
+				  * This shield lasts for <shield>
+				  * This has a <cd> Cooldown
+				- In Desert and Beach biomes
+				   * Increases Movement Speed by <speed>
+				'''
+			MirrorOrb:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to activate a reflecting shield
+				   * This shield reflects <reflect> of all damage taken
+				   * This effect lasts for <hitAmount> Hits
+				   * When using this ability again, resets the amount of reflected hits to <hitAmount>
+				'''
+			MoistPest:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to:
+				   * Shoot a Circle of Water Spears around you
+				   * These Spears deal <dmg> Damage
+				   * This has a <cd> Cooldown
+				- Increases movement speed in Beach Biomes by <speed>
+				'''
+			RepairBot:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to consume your enemies lifeforce!
+				   * This builds stacks
+				   * Current Stacks: <stacks>
+				   * This has a <cd> Cooldown
+				      - When not hitting enemies, this has a <halfCd> Cooldown instead
+				   * Increases Defense and Health based on how many stacks you have
+				   * Health increased by Log10(<stacks>) times <hp>
+				   * Defense increased by Log10(<stacks>) times <def>
+				   * Lose <lose> stacks upon death
+				'''
+			SharkHeart:
+				'''
+				Combines the effects of the Shark Pets and improves them
+				- When hitting enemies with Melee Weapons, gain Damage increasing stacks
+				- These Stacks increase damage by <dmg>
+				- Current Stacks: <stacks>
+				   * Maximum of <maxStacks> stacks
+				- In the Desert and during a Sandstorm:
+				   * Maximum of <sandstorm> stacks
+				- After <lose>, you lose your stacks
+				- When hitting enemies, apply Irradiated and Crush Depth for <secs>
+				'''
+			Shydolist:
+				'''
+				- When using Magic Weapons:
+				   * Reduces Cast time by <time>
+				   * Reduces Mana Cost by <mana>
+				- Applies Electrify for <secs> when hitting enemies
+				'''
+			SkaterNymph:
+				'''
+				- Halves the effects of Irradiated
+				   * Take <dmg> less Damage Per Second
+				   * Lose <def> less Defense
+				- In the Sulphurous Sea
+				   * Increases Breath Timer by <breath>
+				'''
+			SlayerDoll:
+				'''
+				The Sentinels protect and buff you!
+				- Press Pet Ability Keybind (<keybind>) to activate a stronger reflecting shield
+				   * This shield reflects <reflect> of all damage taken
+				   * This effect lasts for <hitCount> Hits
+				   * Also shoot out a barrage of Signus Scythes
+				      - These Scythes deal <scytheDmg> Damage
+				   * This has a <cd> Cooldown
+				- Whilst it's raining
+				   * Gain <speed> increased Movement Speed
+				   * Gain <wing> increased Horizontal Flight
+				   * Gain <run> increased Run Acceleration
+				'''
+			Smauler:
+				'''
+				- Within a <px> pixel radius:
+				   * Apply Irradiated to enemies for <secs>
+				'''
+			SmolCrab:
+				'''
+				- Increases Life Regen by <regen>
+				- When hit, gives you the "Mushy" buff for <secs>
+				'''
+			SneakerDude:
+				'''
+				- Decreases damage taken from Brimstone Flames by <dmg>
+				- Increases Chance of getting Bloodstone from enemies by <fort>
+				'''
+			StasisDrone:
+				'''
+				- Whilst it's raining
+				   * Gain <speed> increased Movement Speed
+				   * Gain <wing> increased Horizontal Flight Speed
+				   * Gain <run> increased Run Acceleration
+				'''
+			Tara:
+				'''
+				- Within a <px> pixel radius:
+				- Press Pet Ability Keybind (<keybind>) to
+				   * Confuse Enemies around you for <secs>
+				   * This has a <cd> Cooldown
+				'''
+			WormTumor:
+				'''
+				- When hitting enemies using Melee or Rogue weapons
+				   * Apply Ichor for <hit>
+				   * Apply Burning Blood for <hit>
+				- When hitting enemies with True Melee Attacks
+				   * Apply Ichor for <meleeHit>
+				   * Apply Burning Blood for <meleeHit>
+				'''
+			WyrmCan:
+				'''
+				- Allows you to fish in any amount of liquid tiles
+				- Increases fishing power by <bait> of your Bait Power
+				'''
+
+			Scuttlers: {
+				GenericScuttle:
+					'''
+					- Gives <def> Defense
+					- Improves <gem> Staff and <color> Phaseblade
+					   * Increased Damage by <dmg>
+					- Improves <gem> Robe
+					   * Increased Defense by <robeDef>
+					   * Increased Max Mana by <mana>
+					- Gives a <chance> chance to drop extra <gem>
+					'''
+				CrystalScuttle:
+					'''
+					- Gives <def> Defense
+					- Improves Crystal Vile Shard and Crystal Serpent
+					   * Increased Damage by <weaponDmg>
+					- Improves Crystal Bullets and Crystal Darts
+					   * Increased Damage by <ammoDmg>
+					'''
+				SpikeScuttle:
+					'''
+					Combines all Scuttler Pet Effects and improves them
+					- Gives <def> Defense
+					- Improves all Gem Staffs, Phaseblades and Phasesabers
+					   *Increased Damage by <dmg>
+					- Improves all Gem Robes
+					   * Increased Defense by <robeDef>
+					   * Increased Max Mana by <mana>
+					- Improves Crystal Vile Shard and Crystal Serpent
+					   * Increased Damage by <dmg>
+					- Improves Crystal Bullets and Crystal Darts
+					   * Increased Damage by <ammoDmg>
+					- Gives a <chance> chance to drop an extra Gem on all Gem Types
+					'''
+			}
+
+			Elementals: {
+				BabyBrimling:
+					'''
+					- Gain a damaging cicle of Flames
+					   * This effect has a radius of <px> Pixels
+					   * Applies On Fire! for <secs> to enemies
+					   * This keeps being reapplied until the enemy leaves the circle
+					'''
+				BabyCloud: - Increases movement speed by <speed>
+				BabyDusty:
+					'''
+					- When damaged:
+					   * Confuse Enemies around you for <secs>
+					   * This effect has a radius of <px> Pixels
+					'''
+				BabyRareDusty:
+					'''
+					- In a <px> Pixel Radius, spawn orbs that heal on pickup
+					   * These orbs heal for 15 Health
+					   * This effect has a <cd> Cooldown
+					'''
+				BabyWaterGal:
+					'''
+					- Gain a slowing circle of water
+					   * This effect has a radius of <px> Pixels
+					   * Applies Slow for <secs> to enemies
+					   * This keeps being reapplied until the enemy leaves the circle
+					'''
+				MiniatureElementalHeart:
+					'''
+					Combines all Elemental Pet Effects and improves them
+					- Gain a damaging circle of Brimstone Flames
+					   * This effect has a radius of <pxFire> Pixels
+					   * Applies Brimstone Flames for <secs> to enemies
+					   * This keeps being reapplied until the enemy leaves the circle
+					- Gain a slowing circle of water
+					   * This effect has a radius of <pxWater> Pixels
+					   * Applies Slow for <secs> to enemies
+					   * This keeps being reapplied until the enemy leaves the circle
+					- Gain increased movement speed by <speed>
+					- In a <pxHeal> Pixel Radius, spawn orbs that heal on pickup
+					   * These orbs heal for 15 Health
+					   * This effect has a <cd> Cooldown
+					- When damaged:
+					   * Confuse Enemies around you for <secs>
+					   * This effect has a radius of <pxDust> Pixels
+					'''
+			}
+
+			ExoMechs: {
+				ExoAres:
+					'''
+					- Increases Damage of "Photon Ripper" by <prDmg>
+					- Increases Damage of "Ares Exoskeleton" by <aeDmg>
+					- Decreases Damage Taken when using "The Jailor" by <reduce>
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoEyes:
+					'''
+					- Increases Crit Chance of "The Atom Splitter" by <crit>
+					- When using "Surge Driver"
+					   * Decreased Use Time by <use>
+					   * Decreased Movement Speed by <speed>
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoWorm:
+					'''
+					- Increases Damage of "Spine of Thanatos" by <stDmg>
+					- Increases Damage of "Atlas Munitions Beacon" by <ambDmg>
+					- Increases Crit Chance of "Refraction Rotor" by <crit>
+					- Sets Damage of all other Weapons to 0
+					'''
+				ExoGemstone:
+					'''
+					Combines Effects of all Exo Mech Pets, and Buffs all weapons
+					- Melee Weapons:
+					   * Increased Damage by <dmg>
+					   * Increased Crit Chance by <crit>
+					- Exo Mech Melee weapons:
+					   * Increased Damage by <meleeDmg>
+					   * Increased Crit Chance by <meleeCrit>
+					- Rogue Weapons:
+					   * Increased Damage by <dmg>
+					   * Increased Crit Chance by <crit>
+					- Exo Mech Rogue weapons:
+					   * Increased Damage by <rogueDmg>
+					   * Increased Crit Chance by <rogueCrit>
+					- Ranged Weapons:
+					   * Increased Damage by <dmg>
+					   * Decreased Use Time by <use>
+					- Exo Mech Ranged Weapons:
+					   * Increased Damage by <rangedDmg>
+					   * Decreased Use Time by <use>
+					- Summon Weapons:
+					   * Increased Damage by <dmg>
+					- Exo Mech Summon Weapons:
+					   * Increased Damage by <summonDmg>
+					'''
+			}
+		}
+
+		SimplePetTooltips: {
+			AeroSlime:
+				'''
 				- Increases flight time
 				- Gives permanent slow fall
 				'''
 			BabyRavager:
 				'''
-				<class>
 				- Based off of your Health and Defense, increase Melee Damage and Crit Chance
-				- Increases damage taken by 20%
+				- Increases damage taken
 				'''
 			BabySignus:
 				'''
-				<class>
-				- Press Pet Ability Keybind (<keybind>) to shoot out 3 Signus Scythes
+				- Press Pet Ability Keybind (<keybind>) to shoot out Signus Scythes
 				- Increases Summon Damage
 				'''
 			BrimstoneBerry:
 				'''
-				<class>
 				- Increases flight time
 				- Decreases damage taken from Brimstone Flames
 				- Nullifies Brimstone Flames when using Dormant Brimseeker
 				'''
 			BuffMan:
 				'''
-				<class>
 				- When hitting enemies with Melee Weapons, gain damage increasing stacks
-				   * Maximum of 5 stacks
 				- When hit, removes all stacks
-				- This effect wears off after 10 seconds of not hitting an enemy
-				- When hitting enemies with Melee Weapons, apply Crush Depth for 5 seconds
-				Only effective for Melee Weapons!
+				- When hitting enemies with Melee Weapons, apply Crush Depth
 				'''
 			ClamHermit:
 				'''
-				<class>
 				- Gain more Breath Time
 				- When underwater, increases Damage of all Weapons
 				'''
 			DriedPest:
 				'''
-				<class>
-				- On cooldown, gain a shield when below 20% HP
+				- On cooldown, gain a shield when at low HP
 				- Increases movement speed in Desert Biomes
 				'''
 			EggBaby:
 				'''
-				<class>
 				Use this pet at your own risk!
 				- Increases damage of the Abandoned Slime Staff
 				'''
 			George:
 				'''
-				<class>
 				- Whilst in the Abyss or Sulphurous Sea:
-				  * Gain 5 Defense
-				  * Slightly reduces enemy aggression
+				  * Slightly increase defense
+				  * Enemies are less likely to target you
 				'''
 			GeorgeMecha:
 				'''
-				<class>
 				- Buffs all of Draedon's Arsenal
 				   * Pre Hardmode weapons are slightly buffed
 				   * Hardmode weapons are considerably buffed
 				   * Post Moonlord weapons are significantly buffed
 				- Whilst in the Abyss or Sulphurous Sea
-				   * Considerably reduces enemy aggression
+				   * Enemies are less likely to target you
 				'''
-			GrandsonShark:
-				'''
-				<class>
-				- Increases damage of weapons crafted with "Grand Scale"
-				'''
-			JellyCrystal:
-				'''
-				<class>
-				- Consume gel to increase summon and minion damage
-				'''
+			GrandsonShark: - Increases damage of weapons crafted with "Grand Scale"
+			JellyCrystal: - Consume gel to increase Summon and Minion damage
 			JungleNugget:
 				'''
-				<class>
 				- With Rogue and Melee weapons, apply Dragonfire on hit
 				- Deal less Damage with Rogue and Melee weapons
 				- Deal more Damage with Yharon Dropped Rogue and Melee weapons
 				'''
 			KingsCoin:
 				'''
-				<class>
-				- On cooldown, when below 20% hp
+				- On cooldown, when below at low HP
 				  * Gain a temporary shield
 				  * Shoot a barrage of Water Spears
 				- Increases movement speed in Desert and Beach Biomes
 				'''
 			MirrorOrb:
 				'''
-				<class>
 				- Press Pet Ability Keybind (<keybind>) to activate a reflecting shield
-				   * This shield reflects 40% of all damage taken
+				   * This shield reflects Damage back to enemies
 				   * This effect lasts for 5 Hits
 				'''
 			MoistPest:
 				'''
-				<class>
 				- Press Pet Ability Keybind (<keybind>) to shoot a circle of Water Spears
 				- Increases movement speed in Beach Biomes
 				'''
 			RepairBot:
 				'''
-				<class>
 				- Press Pet Ability Keybind (<keybind>) to consume your enemies lifeforce!
 				   * This builds stacks
 				   * Increases defense and health based on how many stacks you have
@@ -119,218 +440,117 @@ Mods: {
 				'''
 			SharkHeart:
 				'''
-				<class>
 				Combines the effects of the Shark Pets and improves them
 				- When hitting enemies with Melee Weapons, gain Damage increasing stacks
-				   * Maximum of 10 stacks
-				- In the Desert, during a Sandstorm:
-				   * Maximum of 15 stacks
-				- When hitting, apply Irradiated and Crush Depth for 5 seconds
+				- In the Desert, during a Sandstorm you can gain more stacks
+				- When hitting, apply Irradiated and Crush Depth
 				'''
 			Shydolist:
 				'''
-				<class>
-				- Reduces cost and use time of magic weapons
+				- Reduces cost and use time of Magic Weapons
 				- Applies Electrify when hitting enemies
 				'''
 			SkaterNymph:
 				'''
-				<class>
 				- Halves the effects of Irradiated
-				- In the Sulphurous Sea, gives increased Breath Timer
+				- In the Sulphurous Sea, gives increased Breath Time
 				'''
 			SlayerDoll:
 				'''
-				<class>
 				The Sentinels protect and buff you!
 				- Press Pet Ability Keybind (<keybind>) to activate a stronger reflecting shield
-				   * This shield reflects 45% of all damage taken
+				   * This shield reflects damage taken
 				   * This effect lasts for 5 Hits
 				   * Also shoot out a barrage of Signus Scythes
 				- Whilst it's raining
 				   * Gain increased Movement Speed, Horizontal Flight Speed and Run Acceleration
 				'''
-			Smauler:
-				'''
-				<class>
-				- Within a radius, apply Irradiated to enemies
-				'''
+			Smauler: - Within a radius, apply Irradiated to enemies
 			SmolCrab:
 				'''
-				<class>
-				- Gives increased life regen
-				- When hit, gives you the "Mushy" buff for 5 seconds
+				- Increases Life Regen
+				- When hit, gives you the "Mushy" buff
 				'''
 			SneakerDude:
 				'''
-				<class>
 				- Decreases damage taken from Brimstone Flames
 				- Increases Fortune on Bloodstone
 				'''
-			StasisDrone:
-				'''
-				<class>
-				- Whilst it's raining
-				   * Gain increased Movement Speed
-				   * Gain increased Horizontal Flight Speed
-				   * Gain increased Run Acceleration
-				'''
-			Tara:
-				'''
-				<class>
-				- Press Pet Ability Keybind (<keybind>) to confuse enemies around you
-				'''
+			StasisDrone: - Whilst it's raining, gain increased Movement Speed, Horizontal Flight Speed and Run Acceleration
+			Tara: - Press Pet Ability Keybind (<keybind>) to confuse enemies around you
 			WormTumor:
 				'''
-				<class>
-				- When using Melee or Rogue weapons
-				   * Apply Ichor and Burning Blood
+				- When using Melee or Rogue weapons, apply Ichor and Burning Blood on hit
 				- This effect lasts longer for True Melee Attacks
 				'''
 			WyrmCan:
 				'''
-				<class>
 				- Allows you to fish anywhere, no matter the size of the pond
 				- Increases fishing power by a percentage of your bait power
 				'''
+
 			Scuttlers: {
-				AmberScuttle:
+				GenericScuttle:
 					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Amber Staff and Amber Robe
-					- Improves Yellow Phaseblade
-					- Gives Fortune on Amber
-					'''
-				AmethystScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Amethyst Staff and Amethyst Robe
-					- Improves Purple Phaseblade
-					- Gives Fortune on Amethysts
+					- Increases Defense
+					- Improves <gem> Staff and <gem> Robe
+					- Improves <color> Phaseblade
+					- Gives Fortune on <gem>
 					'''
 				CrystalScuttle:
 					'''
-					<class>
-					- Gives 10 Defense
+					- Increases Defense
 					- Improves Crystal Weapons and Ammo
-					'''
-				DiamondScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Diamond Staff and Diamond Robe
-					- Improves White Phaseblade
-					- Gives Fortune on Diamonds
-					'''
-				EmeraldScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Emerald Staff and Emerald Robe
-					- Improves Green Phaseblade
-					- Gives Fortune on Emeralds
-					'''
-				RubyScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Ruby Staff and Ruby Robe
-					- Improves Red Phaseblade
-					- Gives Fortune on Rubies
-					'''
-				SapphireScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Sapphire Staff and Sapphire Robe
-					- Improve Blue Phaseblade
-					- Gives Fortune on Sapphires
-					'''
-				TopazScuttle:
-					'''
-					<class>
-					- Gives 5 Defense
-					- Improves Topaz Staff and Topaz Robe
-					- Improves Yellow Phaseblade
-					- Gives Fortune on Topaz
 					'''
 				SpikeScuttle:
 					'''
-					<class>
-					- Combines all Scuttler Pet Effects and improves them
-					  * Gives 20 Defense
-					  * Improves all Gem Staffs and Robes
-					  * Improves all Phaseblades and Phasesabers
-					  * Improves Crystal Weapons and Ammo
-					  * Gives Fortune on all Gem Types
+					Combines all Scuttler Pet Effects and improves them
+					- Majorly increases Defense
+					- Improves all Gem Staffs and Robes
+					- Improves all Phaseblades and Phasesabers
+					- Improves Crystal Weapons and Ammo
+					- Gives Fortune on all Gem Types
 					'''
 			}
 
 			Elementals: {
-				BabyBrimling:
-					'''
-					<class>
-					- Gain a damaging cicle of Flames
-					'''
-				BabyCloud:
-					'''
-					<class>
-					- Increases movement speed
-					'''
-				BabyDusty:
-					'''
-					<class>
-					- When damaged, confuse enemies around you
-					'''
-				BabyRareDusty:
-					'''
-					<class>
-					- Spawns orbs that heal on pickup
-					'''
-				BabyWaterGal:
-					'''
-					<class>
-					- Gain a slowing circle of water
-					'''
+				BabyBrimling: - Gain a damaging cicle of Flames
+				BabyCloud: - Increases movement speed
+				BabyDusty: - When damaged, confuse enemies around you
+				BabyRareDusty: - Spawns orbs that heal on pickup
+				BabyWaterGal: - Gain a slowing circle of water
 				MiniatureElementalHeart:
 					'''
-					<class>
-					- Combines all Elemental Pet Effects and improves them
-					  * Gain a damaging circle of Brimstone Flames
-					  * Gain a slowing circle of water
-					  * Gain increased movement speed
-					  * Spawn orbs that heal on pickup
-					  * When damaged, confuse enemies around you
+					Combines all Elemental Pet Effects and improves them
+					- Gain a damaging circle of Brimstone Flames
+					- Gain a slowing circle of water
+					- Gain increased movement speed
+					- Spawn orbs that heal on pickup
+					- When damaged, confuse enemies around you
 					'''
 			}
 
 			ExoMechs: {
 				ExoAres:
 					'''
-					<class>
 					- Increases Damage of "Photon Ripper" and "Ares Exoskeleton"
-					- Decreases Use Time of "The Jailor" but lowers Movement Speed
+					- Reduces Damage Taken when using "The Jailor"
 					- Sets Damage of all other Weapons to 0
 					'''
 				ExoEyes:
 					'''
-					<class>
 					- Increases Crit Chance of "The Atom Splitter"
-					- Decreases Use Time of "Surge Driver"
+					- Decreases Use Time of "Surge Driver" but lowers Movement Speed
 					- Sets Damage of all other Weapons to 0
 					'''
 				ExoWorm:
 					'''
-					<class>
 					- Increases Damage of "Spine of Thanatos" and "Atlas Munitions Beacon"
 					- Increases Crit Chance of "Refraction Rotor"
 					- Sets Damage of all other Weapons to 0
 					'''
 				ExoGemstone:
 					'''
-					<class>
 					- Combines Effects of all Exo Mech Pets
 					  * Increases Damage of all Melee, Rogue, Ranged and Summon Weapons
 					  * Increases Crit Chance of all Melee and Rogue Weapons

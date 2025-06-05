@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CalamityMod.BiomeManagers;
 using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Items.Weapons.DraedonsArsenal;
 using CalamityMod.Items.Weapons.Ranged;
-using CalamityMod.World;
 using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using static System.Net.WebRequestMethods;
 
 namespace POCalValAddon.PetEffects
 {
@@ -106,7 +99,12 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<GeorgeMecha>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.GeorgeMecha");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.GeorgeMecha")
+                .Replace("<phm>", PetUtil.FloatToPercent(mechaGeorge.mechaPreHmDmg))
+                .Replace("<hm>", PetUtil.FloatToPercent(mechaGeorge.mechaHmDmg))
+                .Replace("<pml>", PetUtil.FloatToPercent(mechaGeorge.mechaPostMlDmg))
+                .Replace("<aggro>", PetUtil.FloatToPercent(mechaGeorge.mechaAggro));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.GeorgeMecha");
         }
     }
 }

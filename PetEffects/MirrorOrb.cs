@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CalValEX.Items.Pets;
+using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.GameInput;
-using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace POCalValAddon.PetEffects
 {
@@ -20,9 +15,11 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
 
         public int mirrorHit = 0;
-        public int mirrorHitMax = 300;
+        public int mirrorHitMax = 5;
         public int mirrorCooldown = 7200;
-        public float mirrorReduction = 0.6f;
+        public float mirrorReduction = 0.4f;
+        public float mirrorReflect = 0.4f;
+        public bool mirrorBool = false;
 
         public override int PetAbilityCooldown => mirrorCooldown;
         public override int PetStackCurrent => mirrorHit;
@@ -44,9 +41,28 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped() && mirrorHit > 0)
             {
-                modifiers.FinalDamage *= mirrorReduction; //45% Damage Reduction
-                Player.thorns += 6;
-                mirrorHit++;
+                modifiers.FinalDamage *= 1f - mirrorReduction; //40% Damage Reduction
+                mirrorHit--;
+                mirrorBool = true;
+            }
+            else mirrorBool = false;
+        }
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (PetIsEquipped() && mirrorBool == true)
+            {
+                if (info.DamageSource.TryGetCausingEntity(out Entity entity))
+                {
+                    int damageTaken = Math.Min(info.SourceDamage, Player.statLife);
+                    if (entity is Projectile projectile && projectile.TryGetGlobalProjectile(out ProjectileSourceChecks proj) && Main.npc[proj.sourceNpcId].active && Main.npc[proj.sourceNpcId].dontTakeDamage == false)
+                    {
+                        Main.npc[proj.sourceNpcId].SimpleStrikeNPC(Main.DamageVar(Pet.PetDamage(damageTaken * mirrorReflect, DamageClass.Generic), Player.luck), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                    }
+                    else if (entity is NPC npc && npc.active == true && npc.dontTakeDamage == false)
+                    {
+                        npc.SimpleStrikeNPC(Main.DamageVar(Pet.PetDamage(damageTaken * mirrorReflect, DamageClass.Generic), Player.luck), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                    }
+                }
             }
         }
 
@@ -63,8 +79,11 @@ namespace POCalValAddon.PetEffects
                         return ModContent.GetInstance<MirrorOrb>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.MirrorOrb")
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.MirrorOrb")
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                .Replace("<reflect>", PetUtil.FloatToPercent(mirrorOrb.mirrorReduction))
+                .Replace("<hitAmount>", mirrorOrb.mirrorHitMax.ToString());
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.MirrorOrb").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility));
         }
     }
 }

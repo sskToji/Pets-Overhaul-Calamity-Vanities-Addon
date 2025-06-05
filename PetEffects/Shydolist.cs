@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using PetsOverhaul.Items;
+﻿using CalValEX.Items.Pets;
 using PetsOverhaul.Systems;
-using PetsOverhaul.PetEffects;
+using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using CalValEX;
-using CalValEX.Items.Pets;
 
 //Idea by @iamnamedmuffin
 
@@ -20,7 +15,7 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
 
-        public float shyCost = 0.8f;
+        public float shyCost = 0.2f;
         public float shyUse = 0.2f;
         public int shyElectrifyTime = 300;
 
@@ -28,7 +23,7 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                mult = shyCost;
+                mult = 1f - shyCost;
             }
         }
 
@@ -57,11 +52,15 @@ namespace POCalValAddon.PetEffects
                 {
                     if (Main.LocalPlayer.TryGetModPlayer(out Shydolist pet))
                         return pet;
-                    else 
+                    else
                         return ModContent.GetInstance<Shydolist>();
                 }
             }
-            public override string PetsTooltip => Language.GetTextValue("Mods.POCalValAddon.PetTooltips.Shydolist");
+            public override string PetsTooltip => PetUtil.LocVal("PetTooltips.Shydolist")
+                .Replace("<time>", PetUtil.FloatToPercent(shyDoll.shyUse))
+                .Replace("<mana>", PetUtil.FloatToPercent(shyDoll.shyCost))
+                .Replace("<secs>", PetUtil.IntToTime(shyDoll.shyElectrifyTime));
+            public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.Shydolist");
         }
     }
 }
