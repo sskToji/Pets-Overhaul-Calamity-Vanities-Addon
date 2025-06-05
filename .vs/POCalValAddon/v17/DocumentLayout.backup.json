@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\systems\\cvaglobalpet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:systems\\cvaglobalpet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\junglenugget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\junglenugget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\peteffects\\moistpest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:peteffects\\moistpest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|c:\\users\\administrator\\documents\\my games\\terraria\\tmodloader\\modsources\\pocalvaladdon\\localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B66F6679-6662-4F5D-9369-FE143440C991}|POCalValAddon.csproj|solutionrelative:localization\\en-us.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,17 +18,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "en-US.hjson",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Localization\\en-US.hjson",
               "RelativeDocumentMoniker": "Localization\\en-US.hjson",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Localization\\en-US.hjson",
               "RelativeToolTip": "Localization\\en-US.hjson",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAGUAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-04-05T16:00:21.91Z",
               "IsPinned": true,
@@ -44,41 +36,17 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CVAGlobalpet.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Systems\\CVAGlobalpet.cs",
               "RelativeDocumentMoniker": "Systems\\CVAGlobalpet.cs",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\Systems\\CVAGlobalpet.cs",
               "RelativeToolTip": "Systems\\CVAGlobalpet.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA1wCMAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T15:51:06.323Z",
               "IsPinned": true,
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "JungleNugget.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\JungleNugget.cs",
-              "RelativeDocumentMoniker": "PetEffects\\JungleNugget.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\JungleNugget.cs",
-              "RelativeToolTip": "PetEffects\\JungleNugget.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAvwBkAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T18:27:49.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MoistPest.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\MoistPest.cs",
-              "RelativeDocumentMoniker": "PetEffects\\MoistPest.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\POCalValAddon\\PetEffects\\MoistPest.cs",
-              "RelativeToolTip": "PetEffects\\MoistPest.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAcwD8AAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T18:25:04.149Z"
             }
           ]
         }
