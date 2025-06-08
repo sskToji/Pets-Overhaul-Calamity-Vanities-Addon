@@ -17,7 +17,7 @@ namespace POCalValAddon.PetEffects
         public float desertMovement = 0.20f;
         public float hpTreshold = 0.2f;
         public float baseHpShield = 0.1f;
-        public int driedCooldown = 300;
+        public int driedCooldown = 1800;
         public int driedShieldDuration = 900;
         private int lifeguardMultTimer = 0;
         public override int PetAbilityCooldown => driedCooldown;
@@ -38,6 +38,7 @@ namespace POCalValAddon.PetEffects
                 lifeguardMultTimer = 0;
             }
         }
+
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             if (PetIsEquipped() && Pet.timer <= 0)

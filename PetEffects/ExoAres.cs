@@ -30,7 +30,7 @@ namespace POCalValAddon.PetEffects
             {
                 damage += aresSummonDmg;
             }
-            if (PetIsEquipped() && !CalValItemSets.AresWeapons[item.type]) //For nullifying damage from other weapons
+            if (PetIsEquipped() && !CalValItemSets.AresWeapons[item.type])
             {
                 damage *= aresNoUse;
             }

@@ -29,7 +29,6 @@ namespace POCalValAddon.PetEffects
             }
         }
 
-        //Decreasing or nullifying Brimstone Flames Effect
         public override void UpdateBadLifeRegen()
         {
             if (PetIsEquipped() && Player.HasBuff(ModContent.BuffType<BrimstoneFlames>()) && !IsStrawberry)
@@ -37,6 +36,7 @@ namespace POCalValAddon.PetEffects
                 Player.lifeRegen += (int)brimHealth;
             }
         }
+
         public sealed class BrimstoneBerryPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => brimBerry;

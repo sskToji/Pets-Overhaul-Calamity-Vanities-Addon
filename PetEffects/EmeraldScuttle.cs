@@ -23,7 +23,7 @@ namespace POCalValAddon.PetEffects
         public float weaponDmg = 0.25f;
         public int emeraldMana = 50;
 
-        public override void PostUpdateMiscEffects() //Defense increase from Scuttle
+        public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())
             {
@@ -31,7 +31,7 @@ namespace POCalValAddon.PetEffects
             }
         }
 
-        public override void ModifyWeaponDamage(Item item, ref StatModifier damage) //Buffs to equipment and changing tooltips of the items
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (PetIsEquipped() && (item.type == ItemID.EmeraldStaff || item.type == ItemID.GreenPhaseblade))
             {
@@ -76,7 +76,7 @@ namespace POCalValAddon.PetEffects
             }
         }
 
-        public override void Load() //Increase in Droprate of Gemtype
+        public override void Load()
         {
             PetsOverhaul.PetsOverhaul.OnPickupActions += PreOnPickup;
         }
@@ -94,7 +94,7 @@ namespace POCalValAddon.PetEffects
             }
         }
 
-        public sealed class EmeraldScuttlePetItem : PetTooltip //Tooltip
+        public sealed class EmeraldScuttlePetItem : PetTooltip
         {
             public override PetEffect PetsEffect => emeScuttle;
             public static EmeraldScuttle emeScuttle

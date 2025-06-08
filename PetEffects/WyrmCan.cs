@@ -10,6 +10,8 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
+//i hate this pet (i really dont it was just way too much struggle to figure this out)
+
 namespace POCalValAddon.PetEffects
 {
     public sealed class WyrmCan : PetEffect

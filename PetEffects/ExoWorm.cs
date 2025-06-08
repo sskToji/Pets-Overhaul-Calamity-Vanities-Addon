@@ -39,7 +39,7 @@ namespace POCalValAddon.PetEffects
             {
                 damage += wormSummonDmg;
             }
-            if (PetIsEquipped() && !CalValItemSets.WormWeapons[item.type]) //For nullifying damage of other weapons
+            if (PetIsEquipped() && !CalValItemSets.WormWeapons[item.type])
             {
                 damage *= wormNoUse;
             }

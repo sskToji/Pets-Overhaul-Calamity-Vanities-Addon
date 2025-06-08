@@ -37,7 +37,6 @@ namespace POCalValAddon.PetEffects
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            //Mirror Matter Reduction Bool enabling and Signus Scythe trigger set
             if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 if (Pet.timer <= 0)
@@ -50,10 +49,9 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            //Applying Mirror Matter Thorns + Damage Reduction
             if (PetIsEquipped() && mirrorHit > 0)
             {
-                modifiers.FinalDamage *= mirrorReduction; //45% Damage Reduction
+                modifiers.FinalDamage *= mirrorReduction;
                 mirrorBool = true;
                 mirrorHit--;
             }
@@ -79,7 +77,6 @@ namespace POCalValAddon.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            //Spawning Signus Scythes
             if (PetIsEquipped() && trigger >= 0)
             {
                 if (trigger % 20 == 0)
@@ -95,7 +92,6 @@ namespace POCalValAddon.PetEffects
                 }
                 trigger--;
             }
-            //Applying Stasis Drone Movespeed Increase
             if (PetIsEquipped() && Player.ZoneRain is not false)
             {
                 Player.moveSpeed += droneMovespeed;
@@ -104,7 +100,6 @@ namespace POCalValAddon.PetEffects
         }
         public override void PostUpdateRunSpeeds()
         {
-            //Applying Stasis Drone Run Acceleration
             if (PetIsEquipped() && Player.ZoneRain is not false)
             {
                 Player.runAcceleration *= droneAccelspeed + 1f;

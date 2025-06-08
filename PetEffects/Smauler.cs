@@ -1,6 +1,7 @@
 ﻿using CalamityMod.Buffs.StatDebuffs;
 using CalamityMod.Dusts;
 using CalValEX.Items.Pets;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using POCalValAddon.Systems;
 using Terraria;
@@ -21,11 +22,11 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, ModContent.DustType<AuricBarDust>(), (int)radiusSmauler, dustAmount: 64);
-                foreach (NPC item in Main.ActiveNPCs)
+                foreach (NPC npc in Main.ActiveNPCs)
                 {
-                    if (item.Distance(Player.Center) <= radiusSmauler)
+                    if (npc.Distance(Player.Center) <= radiusSmauler && !(npc.friendly || npc.CountsAsACritter))
                     {
-                        item.AddBuff(ModContent.BuffType<Irradiated>(), debuffTime);
+                        npc.AddBuff(ModContent.BuffType<Irradiated>(), debuffTime);
                     }
                 }
             }

@@ -5,8 +5,6 @@ using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ModLoader;
 
-//make supportive pet. players in radius get mushy buff, dont forget tooltips when this is done
-
 namespace POCalValAddon.PetEffects
 {
     public sealed class SmolCrab : PetEffect
@@ -14,7 +12,8 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<ClawShroom>();
         public override PetClasses PetClassPrimary => PetClasses.Supportive;
 
-        public int crabRegen = 5;
+        public float crabRegen = 5f;
+        public float crabDef = 2f;
         public int buffDuration = 300;
         public int mushyRadius = 450;
 
@@ -22,7 +21,8 @@ namespace POCalValAddon.PetEffects
         {
             if (PetIsEquipped())
             {
-                Player.lifeRegen += crabRegen;
+                Player.lifeRegen += (int)crabRegen;
+                Player.statDefense += (int)crabDef;
             }
         }
 
@@ -31,6 +31,13 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped())
             {
                 Player.AddBuff(ModContent.BuffType<Mushy>(), buffDuration);
+                foreach (var player in Main.ActivePlayers)
+                {
+                    if (player.Distance(Player.Center) <= mushyRadius)
+                    {
+                        player.AddBuff(ModContent.BuffType<Mushy>(), buffDuration);
+                    }
+                }
             }
         }
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
@@ -38,6 +45,13 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped())
             {
                 Player.AddBuff(ModContent.BuffType<Mushy>(), buffDuration);
+                foreach (var player in Main.ActivePlayers)
+                {
+                    if (player.Distance(Player.Center) <= mushyRadius)
+                    {
+                        player.AddBuff(ModContent.BuffType<Mushy>(), buffDuration);
+                    }
+                }
             }
         }
 
@@ -56,7 +70,8 @@ namespace POCalValAddon.PetEffects
             }
             public override string PetsTooltip => PetUtil.LocVal("PetTooltips.SmolCrab")
                 .Replace("<regen>", smolCrab.crabRegen.ToString())
-                .Replace("<secs>", PetUtil.IntToTime(smolCrab.buffDuration));
+                .Replace("<secs>", PetUtil.IntToTime(smolCrab.buffDuration))
+                .Replace("<radius>", smolCrab.mushyRadius.ToString());
             public override string SimpleTooltip => PetUtil.LocVal("SimplePetTooltips.SmolCrab");
         }
     }

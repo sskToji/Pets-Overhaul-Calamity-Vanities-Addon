@@ -20,6 +20,10 @@ namespace POCalValAddon.PetEffects
     {
         public override int PetItemID => ModContent.ItemType<RepurposedMonitor>();
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
+        public override int PetAbilityCooldown => heartsteelCooldown;
+        public override int PetStackCurrent => heartsteelStacks;
+        public override int PetStackMax => heartsteelStacksMax;
+        public override string PetStackText => "stacks";
 
         public int heartsteelHealthIncrease = 20;
         public int heartsteelDefIncrease = 3;
@@ -54,11 +58,7 @@ namespace POCalValAddon.PetEffects
         }
         public float heartsteelRadius = 160f;
 
-        public override int PetAbilityCooldown => heartsteelCooldown;
-        public override int PetStackCurrent => heartsteelStacks;
-        public override int PetStackMax => heartsteelStacksMax;
 
-        // stacking mechanism
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (Pet.AbilityPressCheck() && PetIsEquipped())
@@ -68,7 +68,7 @@ namespace POCalValAddon.PetEffects
                     bool hit = false;
                     foreach (NPC item in Main.ActiveNPCs)
                     {
-                        if (item.Distance(Player.Center) <= heartsteelRadius && item.friendly == false && item.dontTakeDamage == false)
+                        if (item.Distance(Player.Center) <= heartsteelRadius && !(item.friendly || item.dontTakeDamage || item.CountsAsACritter))
                         {
                             DoHeartSteelDamage(item);
                             heartsteelStacks++;
@@ -139,6 +139,7 @@ namespace POCalValAddon.PetEffects
                 heartsteelStacks = 0;
             }
         }
+
         public sealed class RepairBotPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => repairBot;

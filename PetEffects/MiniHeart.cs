@@ -35,7 +35,7 @@ namespace POCalValAddon.PetEffects
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, (int)radiusFire, dustAmount: 32);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
-                    if (item.Distance(Player.Center) <= radiusFire)
+                    if (item.Distance(Player.Center) <= radiusFire && !(item.friendly || item.CountsAsACritter))
                     {
                         item.AddBuff(ModContent.BuffType<BrimstoneFlames>(), debuffTime);
                     }

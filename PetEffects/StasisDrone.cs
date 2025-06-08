@@ -4,8 +4,6 @@ using POCalValAddon.Systems;
 using Terraria;
 using Terraria.ModLoader;
 
-//change wing to speed, not time
-
 namespace POCalValAddon.PetEffects
 {
     public sealed class StasisDrone : PetEffect

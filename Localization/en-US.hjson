@@ -34,6 +34,7 @@ Mods: {
 				'''
 			BuffMan:
 				'''
+				Current Stacks : <current> out of <stack>
 				- When hitting enemies with Melee Weapons, gain damage increasing stacks
 				   * Maximum of <stack> stacks
 				   * When hit, removes all stacks
@@ -174,7 +175,10 @@ Mods: {
 			SmolCrab:
 				'''
 				- Increases Life Regen by <regen>
-				- When hit, gives you the "Mushy" buff for <secs>
+				- Increases Defense by <def>
+				- When hit by an enemy:
+				   * Gain the "Mushy" Buff for <secs>
+				   * Players in a <radius> pixel radius also gain the "Mushy" buff for <secs>
 				'''
 			SneakerDude:
 				'''
@@ -469,7 +473,8 @@ Mods: {
 			SmolCrab:
 				'''
 				- Increases Life Regen
-				- When hit, gives you the "Mushy" buff
+				- Increases Defense
+				- When hit, gives you and players around you the "Mushy" buff
 				'''
 			SneakerDude:
 				'''

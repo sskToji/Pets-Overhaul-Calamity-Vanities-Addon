@@ -12,6 +12,9 @@ namespace POCalValAddon.PetEffects
     {
         public override int PetItemID => ModContent.ItemType<HeartoftheSharks>();
         public override PetClasses PetClassPrimary => PetClasses.Melee;
+        public override int PetStackCurrent => currentStacks;
+        public override int PetStackMax => dmgStacksMax;
+        public override string PetStackText => "damage stacks";
 
         internal int currentStacks = 0;
         private int timer = 0;
@@ -21,10 +24,6 @@ namespace POCalValAddon.PetEffects
         public int dmgStacksMaxNormal = 10;
         public float dmgIncrease = 0.02f;
         public int debuffDuration = 300;
-
-        public override int PetStackCurrent => currentStacks;
-        public override int PetStackMax => dmgStacksMax;
-        public override string PetStackText => "damage stacks";
 
         public override void ExtraPreUpdate()
         {

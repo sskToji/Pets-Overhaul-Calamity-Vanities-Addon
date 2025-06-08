@@ -24,14 +24,14 @@ namespace POCalValAddon.PetEffects
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, (int)radiusFire, dustAmount: 32);
                 foreach (NPC item in Main.ActiveNPCs)
                 {
-                    if (item.Distance(Player.Center) <= radiusFire)
+                    if (item.Distance(Player.Center) <= radiusFire && !(item.friendly || item.CountsAsACritter || item.dontTakeDamage))
                     {
                         item.AddBuff(BuffID.OnFire, debuffTime);
                     }
                 }
             }
         }
-        public sealed class BabyBrimlingPetItem : PetTooltip //Tooltip
+        public sealed class BabyBrimlingPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => babyBrimling;
             public static BabyBrimling babyBrimling

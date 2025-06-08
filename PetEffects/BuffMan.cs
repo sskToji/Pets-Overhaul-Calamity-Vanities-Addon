@@ -12,6 +12,9 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<ReaperoidPills>();
         public override PetClasses PetClassPrimary => PetClasses.Melee;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
+        public override int PetStackCurrent => currentStacks;
+        public override int PetStackMax => dmgStacksMax;
+        public override string PetStackText => "stacks";
 
         internal int currentStacks = 0;
         private int timer = 0;
@@ -20,9 +23,6 @@ namespace POCalValAddon.PetEffects
         public int dmgStacksMaxSandstorm = 15;
         public float dmgIncrease = 0.02f;
         public int crushDepthDuration = 300;
-
-        //public override int PetStackCurrent => currentStacks;
-        //public override int PetStackMax => dmgStacksMax;
 
         public override void ExtraPreUpdate()
         {
@@ -84,6 +84,7 @@ namespace POCalValAddon.PetEffects
                 }
             }
             public override string PetsTooltip => PetUtil.LocVal("PetTooltips.BuffMan")
+                .Replace("<current>", buffMan.currentStacks.ToString())
                 .Replace("<stack>", buffMan.dmgStacksMax.ToString())
                 .Replace("<secs>", PetUtil.IntToTime(buffMan.dmgBuffDuration))
                 .Replace("<debuff>", PetUtil.IntToTime(buffMan.crushDepthDuration));

@@ -21,7 +21,7 @@ namespace POCalValAddon.PetEffects
             }
         }
 
-        public sealed class BabyCloudPetItem : PetTooltip //Tooltip
+        public sealed class BabyCloudPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => babyCloud;
             public static BabyCloud babyCloud

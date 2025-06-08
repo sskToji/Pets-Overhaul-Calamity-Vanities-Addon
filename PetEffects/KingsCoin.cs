@@ -48,6 +48,15 @@ namespace POCalValAddon.PetEffects
             }
         }
 
+        public override void ExtraPreUpdate()
+        {
+            lifeguardMultTimer--;
+            if (lifeguardMultTimer < 0)
+            {
+                lifeguardMultTimer = 0;
+            }
+        }
+
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             if (PetIsEquipped() && Pet.timer <= 0)
@@ -77,7 +86,8 @@ namespace POCalValAddon.PetEffects
                     }
                 };
             }
-        }
+        
+
         public sealed class KingsCoinPetItem : PetTooltip
         {
             public override PetEffect PetsEffect => kingCoin;

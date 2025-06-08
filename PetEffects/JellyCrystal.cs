@@ -12,6 +12,9 @@ namespace POCalValAddon.PetEffects
     {
         public override int PetItemID => ModContent.ItemType<IonizedJellyCrystal>();
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
+        public override int PetStackCurrent => gelConsume;
+        public override int PetStackMax => gelConsumeMax;
+        public override string PetStackText => "gel hits";
 
         public int gelConsume = 0;
         public int gelConsumeMax = 30;

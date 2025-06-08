@@ -12,12 +12,12 @@ namespace POCalValAddon.PetEffects
         public override int PetItemID => ModContent.ItemType<MoistLocket>();
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
+        public override int PetAbilityCooldown => moistCooldown;
 
         public int moistCooldown = 300;
         public float moistRadius = 20f;
         public int moistDmg = 100;
         public float beachMovement = 0.20f;
-        public override int PetAbilityCooldown => moistCooldown;
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {

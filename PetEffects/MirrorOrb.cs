@@ -13,6 +13,10 @@ namespace POCalValAddon.PetEffects
     {
         public override int PetItemID => ModContent.ItemType<MirrorMatter>();
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
+        public override int PetAbilityCooldown => mirrorCooldown;
+        public override int PetStackCurrent => mirrorHit;
+        public override int PetStackMax => mirrorHitMax;
+        public override string PetStackText => "shielded hits";
 
         public int mirrorHit = 0;
         public int mirrorHitMax = 5;
@@ -20,11 +24,6 @@ namespace POCalValAddon.PetEffects
         public float mirrorReduction = 0.4f;
         public float mirrorReflect = 0.4f;
         public bool mirrorBool = false;
-
-        public override int PetAbilityCooldown => mirrorCooldown;
-        public override int PetStackCurrent => mirrorHit;
-        public override int PetStackMax => mirrorHitMax;
-        public override string PetStackText => "shielded hits";
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {

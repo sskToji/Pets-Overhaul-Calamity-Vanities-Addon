@@ -15,8 +15,6 @@ namespace POCalValAddon.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
 
-        //For lists used in this Pet, reference to CalValItemSets in CVAGlobalPet.
-
         public int defenseStat = 20;
         public float weaponBuff = 0.4f;
         public int robeDef = 10;
