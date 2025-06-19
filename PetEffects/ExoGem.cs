@@ -63,7 +63,7 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && proj.GetGlobalProjectile<GemProjectile>().gemProj == true && (proj.CountsAsClass<SummonDamageClass>() || proj.CountsAsClass<RangedDamageClass>()))
+            if (PetIsEquipped() && proj.GetGlobalProjectile<SourceProjectile>().myProj == true && (proj.CountsAsClass<SummonDamageClass>() || proj.CountsAsClass<RangedDamageClass>()))
             {
                 modifiers.FinalDamage += gemWeaponDmg;
             }
@@ -73,22 +73,6 @@ namespace POCalValAddon.PetEffects
             if (PetIsEquipped())
             {
                 Player.GetAttackSpeed<RangedDamageClass>() += gemRangedUse;
-            }
-        }
-        public sealed class GemProjectile : GlobalProjectile
-        {
-            public override bool InstancePerEntity => true;
-            public bool gemProj = false;
-            public override void OnSpawn(Projectile projectile, IEntitySource source)
-            {
-                if (source is EntitySource_ItemUse item && item.Item is not null)
-                {
-                    gemProj = true;
-                }
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<GemProjectile>().gemProj == true)
-                {
-                    gemProj = true;
-                }
             }
         }
         public sealed class ExoGemPetItem : PetTooltip

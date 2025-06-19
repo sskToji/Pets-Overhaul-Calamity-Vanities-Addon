@@ -58,28 +58,12 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !(CalValItemSets.EyesWeapons[proj.type] || proj.GetGlobalProjectile<EyesProjectile>().eyesProj))
+            if (PetIsEquipped() && !(CalValItemSets.EyesWeapons[proj.type] || proj.GetGlobalProjectile<SourceProjectile>().myProj))
             {
                 target.takenDamageMultiplier = eyesNoUse;
                 if (target.lifeRegen < 0)
                 {
                     target.lifeRegen = 0;
-                }
-            }
-        }
-        public sealed class EyesProjectile : GlobalProjectile
-        {
-            public override bool InstancePerEntity => true;
-            public bool eyesProj = false;
-            public override void OnSpawn(Projectile projectile, IEntitySource source)
-            {
-                if (source is EntitySource_ItemUse item && item.Item is not null && CalValItemSets.EyesWeapons[item.Item.type])
-                {
-                    eyesProj = true;
-                }
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<EyesProjectile>().eyesProj == true)
-                {
-                    eyesProj = true;
                 }
             }
         }

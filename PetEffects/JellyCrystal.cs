@@ -22,7 +22,7 @@ namespace POCalValAddon.PetEffects
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && proj.GetGlobalProjectile<JellyProjectile>().jellyProj == true && proj.CountsAsClass<SummonDamageClass>())
+            if (PetIsEquipped() && proj.GetGlobalProjectile<SourceProjectile>().myProj == true && proj.CountsAsClass<SummonDamageClass>())
             {
                 if (gelConsume > 0)
                 {
@@ -33,22 +33,6 @@ namespace POCalValAddon.PetEffects
                 {
                     Player.ConsumeItem(ItemID.Gel);
                     gelConsume = gelConsumeMax;
-                }
-            }
-        }
-        public sealed class JellyProjectile : GlobalProjectile
-        {
-            public override bool InstancePerEntity => true;
-            public bool jellyProj = false;
-            public override void OnSpawn(Projectile projectile, IEntitySource source)
-            {
-                if (source is EntitySource_ItemUse item && item.Item is not null)
-                {
-                    jellyProj = true;
-                }
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<JellyProjectile>().jellyProj == true)
-                {
-                    jellyProj = true;
                 }
             }
         }

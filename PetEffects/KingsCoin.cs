@@ -86,7 +86,7 @@ namespace POCalValAddon.PetEffects
                     }
                 };
             }
-        
+        }
 
         public sealed class KingsCoinPetItem : PetTooltip
         {

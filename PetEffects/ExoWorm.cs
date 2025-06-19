@@ -58,28 +58,12 @@ namespace POCalValAddon.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (PetIsEquipped() && !(CalValItemSets.WormWeapons[proj.type] || proj.GetGlobalProjectile<WormProjectile>().wormProj))
+            if (PetIsEquipped() && !(CalValItemSets.WormWeapons[proj.type] || proj.GetGlobalProjectile<SourceProjectile>().myProj))
             {
                 target.takenDamageMultiplier = wormNoUse;
                 if (target.lifeRegen < 0)
                 {
                     target.lifeRegen = 0;
-                }
-            }
-        }
-        public sealed class WormProjectile : GlobalProjectile
-        {
-            public override bool InstancePerEntity => true;
-            public bool wormProj = false;
-            public override void OnSpawn(Projectile projectile, IEntitySource source)
-            {
-                if (source is EntitySource_ItemUse item && item.Item is not null && CalValItemSets.WormWeapons[item.Item.type])
-                {
-                    wormProj = true;
-                }
-                if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.GetGlobalProjectile<WormProjectile>().wormProj == true)
-                {
-                    wormProj = true;
                 }
             }
         }

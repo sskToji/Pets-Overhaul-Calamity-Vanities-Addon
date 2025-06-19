@@ -12,6 +12,13 @@ Mods: {
 				- Increases flight time by <wing>
 				- Gives permanent slow fall
 				'''
+			Aureophage:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to infect your enemies with Astral Infection
+				   * Enemies get infected for <secs>
+				   * When enemies touch other enemies, the infection spreads
+				   * The spread infection also lasts for <secs>
+				'''
 			BabyRavager:
 				'''
 				- Increase your Damage Bonuses by <perc> of Current Health and Defense
@@ -356,6 +363,11 @@ Mods: {
 				'''
 				- Increases flight time
 				- Gives permanent slow fall
+				'''
+			Aureophage:
+				'''
+				- Press Pet Ability Keybind (<keybind>) to infect your enemies with Astral Infection
+				   * When enemies touch other enemies, they also get infected
 				'''
 			BabyRavager:
 				'''
